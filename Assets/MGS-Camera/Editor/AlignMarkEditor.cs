@@ -45,13 +45,13 @@ namespace Developer.Camera
                 previewCamera.targetTexture = previewTexture;
             }
             previewCamera.transform.parent = script.transform;
-        }//OnEnable()_end
+        }
 
         protected virtual void OnDisable()
         {
             if (Selection.activeGameObject == null || Selection.activeGameObject.GetComponent<AlignMark>() == null)
                 DestroyImmediate(previewCamera.gameObject, true);
-        }//OnDisable()_end
+        }
 
         protected virtual void OnSceneGUI()
         {
@@ -68,9 +68,9 @@ namespace Developer.Camera
             DrawArrow(script.alignTarget.center.position, previewCamera.transform.position, nodeSize, "Camera", blue);
             DrawArrow(script.alignTarget.center.position, -previewCamera.transform.forward, script.alignTarget.distanceRange.min, nodeSize, "Min", blue);
             DrawArrow(script.alignTarget.center.position, -previewCamera.transform.forward, script.alignTarget.distanceRange.max, nodeSize, "Max", blue);
-            
+
             DrawSceneTool();
-        }//OnSceneGUI()_end
+        }
 
         protected virtual void DrawSceneTool()
         {
@@ -81,7 +81,7 @@ namespace Developer.Camera
             GUILayout.Label(previewCamera.targetTexture);
             GUILayout.EndArea();
             Handles.EndGUI();
-        }//DrawSceneTool()_end
+        }
         #endregion
-    }//class_end
-}//namespace_end
+    }
+}

@@ -62,7 +62,7 @@ namespace Developer.Camera
             DrawArrow(script.transform.position, script.targetCamera.position, nodeSize, string.Empty, blue);
 
             DrawSceneTool();
-        }//OnSceneGUI()_end
+        }
 
         protected virtual void DrawSceneTool()
         {
@@ -73,7 +73,7 @@ namespace Developer.Camera
             GUILayout.Label((script.transform.position - script.areaSettings.center.position).ToString());
             GUILayout.EndArea();
             Handles.EndGUI();
-        }//DrawSceneTool()_end
+        }
         #endregion
-    }//class_end
-}//namespace_end
+    }
+}

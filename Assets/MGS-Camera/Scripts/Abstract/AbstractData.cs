@@ -24,9 +24,10 @@ namespace Developer.Camera
 
     [Serializable]
     public struct MouseSettings
-    {/// <summary>
-     /// ID of mouse button.
-     /// </summary>
+    {
+        /// <summary>
+        /// ID of mouse button.
+        /// </summary>
         public int mouseButtonID;
 
         /// <summary>
@@ -44,8 +45,8 @@ namespace Developer.Camera
             this.mouseButtonID = mouseButtonID;
             this.pointerSensitivity = pointerSensitivity;
             this.wheelSensitivity = wheelSensitivity;
-        }//M...()_end
-    }//MouseSettings3_end
+        }
+    }
 
     [Serializable]
     public struct Range
@@ -64,8 +65,8 @@ namespace Developer.Camera
         {
             this.min = min;
             this.max = max;
-        }//Range()_end
-    }//Range_end
+        }
+    }
 
     [Serializable]
     public struct PlaneArea
@@ -90,8 +91,8 @@ namespace Developer.Camera
             this.center = center;
             this.width = width;
             this.length = length;
-        }//PlaneArea()_end
-    }//PlaneArea_end
+        }
+    }
 
     [Serializable]
     public struct AlignTarget
@@ -128,6 +129,6 @@ namespace Developer.Camera
             this.distance = distance;
             this.angleRange = angleRange;
             this.distanceRange = distanceRange;
-        }//A...()_end
-    }//AlignTarget_end
-}//namespace_end
+        }
+    }
+}

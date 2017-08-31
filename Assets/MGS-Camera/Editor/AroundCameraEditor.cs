@@ -40,7 +40,7 @@ namespace Developer.Camera
                 return;
             angles = script.transform.eulerAngles;
             distance = Vector3.Distance(script.transform.position, script.target.position);
-        }//OnEnable()_end
+        }
 
         protected virtual void OnSceneGUI()
         {
@@ -61,7 +61,7 @@ namespace Developer.Camera
             DrawArrow(script.target.position, direction, script.distanceRange.max, nodeSize, "Max", blue);
 
             DrawSceneTool();
-        }//OnSceneGUI()_end
+        }
 
         protected virtual void DrawSceneTool()
         {
@@ -72,7 +72,7 @@ namespace Developer.Camera
             GUILayout.BeginHorizontal();
             GUILayout.Label("Angles:");
             EditorGUI.BeginChangeCheck();
-            if(Application.isPlaying)
+            if (Application.isPlaying)
             {
                 GUILayout.Label(script.currentAngles.x.ToString("F2"));
                 GUILayout.Label(script.currentAngles.y.ToString("F2"));
@@ -95,7 +95,7 @@ namespace Developer.Camera
             GUILayout.EndHorizontal();
             GUILayout.EndArea();
             Handles.EndGUI();
-        }//DrawSceneTool()_end
+        }
         #endregion
-    }//class_end
-}//namespace_end
+    }
+}

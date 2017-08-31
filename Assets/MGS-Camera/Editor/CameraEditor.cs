@@ -48,13 +48,13 @@ namespace Developer.Camera
 
             GUI.color = gC;
             Handles.color = hC;
-        }//DrawArrow()_end
+        }
 
         protected virtual void DrawArrow(Vector3 start, Vector3 direction, float length, float size, string text, Color color)
         {
             var end = start + direction.normalized * length;
             DrawArrow(start, end, size, text, color);
-        }//DrawArrow()_end
+        }
 
         protected void DrawPositionHandle(Transform transform)
         {
@@ -64,8 +64,8 @@ namespace Developer.Camera
             {
                 Undo.RecordObject(transform, "Change Position");
                 transform.position = position;
-            }//if()_end
-        }//DrawP...()_end
+            }
+        }
 
         protected Quaternion GetPivotRotation(Transform transform)
         {
@@ -73,7 +73,7 @@ namespace Developer.Camera
                 return transform.rotation;
             else
                 return Quaternion.identity;
-        }//GetP...()_end
+        }
         #endregion
-    }//class_end
-}//namespace_end
+    }
+}

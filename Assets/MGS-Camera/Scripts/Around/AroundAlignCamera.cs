@@ -72,7 +72,7 @@ namespace Developer.Camera
                 AutoAlignView();
             else
                 CheckMouseInput();
-        }//LateUpdate()_end
+        }
 
         /// <summary>
         /// Auto align camera's veiw to target.
@@ -122,13 +122,13 @@ namespace Developer.Camera
                         distanceSpeed = Mathf.Abs(currentDistance - lastDistance) / Time.deltaTime;
                         linearAdsorbent = true;
                     }
-                }//if()_end
+                }
 
                 //Update position and rotation.
                 transform.position = target.position + currentDirection.normalized * currentDistance;
                 transform.rotation = Quaternion.Euler(currentAngles);
-            }//if()_end
-        }//AutoAlignView()_end
+            }
+        }
         #endregion
 
         #region Public Method
@@ -170,7 +170,7 @@ namespace Developer.Camera
             isAligning = true;
             if (alignStartEvent != null)
                 alignStartEvent();
-        }//AlignV...()_end
+        }
 
         /// <summary>
         /// Align camera's veiw to target.
@@ -183,7 +183,7 @@ namespace Developer.Camera
             //Override range.
             angleRange = alignTarget.angleRange;
             distanceRange = alignTarget.distanceRange;
-        }//AlignV...()_end
+        }
         #endregion
-    }//class_end
-}//namespace_end
+    }
+}

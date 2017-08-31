@@ -61,12 +61,12 @@ namespace Developer.Camera
         protected virtual void Start()
         {
             currentOffset = targetOffset = transform.position - areaSettings.center.position;
-        }//Start()_end
+        }
 
         protected virtual void Update()
         {
             CheckMouseInput();
-        }//Update()_end
+        }
 
         /// <summary>
         /// Check and deal with mouse input. 
@@ -86,12 +86,12 @@ namespace Developer.Camera
                 //Range limit.
                 targetOffset.x = Mathf.Clamp(targetOffset.x, -areaSettings.width, areaSettings.width);
                 targetOffset.z = Mathf.Clamp(targetOffset.z, -areaSettings.length, areaSettings.length);
-            }//if()_end
+            }
 
             //Lerp and update transform position.
             currentOffset = Vector3.Lerp(currentOffset, targetOffset, damper * Time.deltaTime);
             transform.position = areaSettings.center.position + currentOffset;
-        }//CheckM...()_end
+        }
         #endregion
-    }//class_end
-}//namespace_end
+    }
+}

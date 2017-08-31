@@ -40,7 +40,7 @@ namespace Developer.Camera
         {
             defaultAlign = new AlignTarget(alignCamera.target, alignCamera.currentAngles,
                 alignCamera.currentDistance, alignCamera.angleRange, alignCamera.distanceRange);
-        }//Start()_end
+        }
 
         void OnGUI()
         {
@@ -58,7 +58,7 @@ namespace Developer.Camera
                 alignCamera.AlignVeiwToTarget(alignMarks[2].alignTarget);
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
-        }//OnGUI()_end
+        }
         #endregion
-    }//class_end
-}//namespace_end
+    }
+}

@@ -78,12 +78,12 @@ namespace Developer.Camera
         {
             currentAngles = targetAngles = transform.eulerAngles;
             currentDistance = targetDistance = Vector3.Distance(transform.position, target.position);
-        }//Start()_end
+        }
 
         protected virtual void LateUpdate()
         {
             CheckMouseInput();
-        }//LateUpdate()_end
+        }
 
         /// <summary>
         /// Check and deal with mouse input. 
@@ -98,7 +98,7 @@ namespace Developer.Camera
 
                 //Range.
                 targetAngles.x = Mathf.Clamp(targetAngles.x, angleRange.min, angleRange.max);
-            }//if()_end
+            }
 
             //Mouse scrollwheel.
             targetDistance -= Input.GetAxis("Mouse ScrollWheel") * mouseSettings.wheelSensitivity;
@@ -111,7 +111,7 @@ namespace Developer.Camera
             //Update transform position and rotation.
             transform.rotation = Quaternion.Euler(currentAngles);
             transform.position = target.position - transform.forward * currentDistance;
-        }//CheckM...()_end
+        }
         #endregion
-    }//class_end
-}//namespace_end
+    }
+}

@@ -36,7 +36,7 @@ namespace Developer.Camera
         {
             //Reset align target.
             alignTarget = new AlignTarget(transform, new Vector2(30, 0), 5, new Range(-90, 90), new Range(1, 10));
-        }//Reset()_end
+        }
         #endregion
-    }//class_end
-}//namespace_end
+    }
+}

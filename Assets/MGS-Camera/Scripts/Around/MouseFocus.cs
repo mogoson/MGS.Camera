@@ -62,12 +62,12 @@ namespace Developer.Camera
         {
             targetCamera = GetComponent<Camera>();
             alignCamera = GetComponent<AroundAlignCamera>();
-        }//Start()_end
+        }
 
         protected virtual void OnGUI()
         {
             //Check mouse left button double click.
-            if(Event.current.isMouse && Event.current.button == 0 && Event.current.clickCount == 2)
+            if (Event.current.isMouse && Event.current.button == 0 && Event.current.clickCount == 2)
             {
                 var ray = targetCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hitInfo;
@@ -86,12 +86,12 @@ namespace Developer.Camera
                     }
                 }
             }
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 isFocus = false;
                 alignCamera.AlignVeiwToTarget(defaultAlign);
             }
-        }//OnGUI()_end
+        }
         #endregion
-    }//class_end
-}//namespace_end
+    }
+}
