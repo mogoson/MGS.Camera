@@ -1,27 +1,20 @@
 /*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
- *  FileName: MouseTranslate.cs
- *  Author: Mogoson   Version: 1.0   Date: 4/28/2017
- *  Version Description:
- *    Internal develop version,mainly to achieve its function.
- *  File Description:
- *    Ignore.
- *  Class List:
- *    <ID>           <name>             <description>
- *     1.        MouseTranslate            Ignore.
- *  Function List:
- *    <class ID>     <name>             <description>
- *     1.
- *  History:
- *    <ID>    <author>      <time>      <version>      <description>
- *     1.     Mogoson     4/28/2017       1.0        Build this file.
+ *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+ *------------------------------------------------------------------------
+ *  File         :  MouseTranslate.cs
+ *  Description  :  Mouse pointer drag to translate gameobject.
+ *------------------------------------------------------------------------
+ *  Author       :  Mogoson
+ *  Version      :  0.1.0
+ *  Date         :  4/28/2017
+ *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace Developer.Camera
-{
-    using UnityEngine;
+using UnityEngine;
 
-    [AddComponentMenu("Developer/Camera/MouseTranslate")]
+namespace Developer.CameraExtension
+{
+    [AddComponentMenu("Developer/CameraExtension/MouseTranslate")]
     public class MouseTranslate : MonoBehaviour
     {
         #region Property and Field

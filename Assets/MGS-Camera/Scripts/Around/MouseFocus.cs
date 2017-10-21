@@ -1,28 +1,21 @@
 /*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
- *  FileName: MouseFocus.cs
- *  Author: Mogoson   Version: 1.0   Date: 5/28/2017
- *  Version Description:
- *    Internal develop version,mainly to achieve its function.
- *  File Description:
- *    Ignore.
- *  Class List:
- *    <ID>           <name>             <description>
- *     1.          MouseFocus              Ignore.
- *  Function List:
- *    <class ID>     <name>             <description>
- *     1.
- *  History:
- *    <ID>    <author>      <time>      <version>      <description>
- *     1.     Mogoson     5/28/2017       1.0        Build this file.
+ *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+ *------------------------------------------------------------------------
+ *  File         :  MouseFocus.cs
+ *  Description  :  Mouse button click to align camera to target.
+ *------------------------------------------------------------------------
+ *  Author       :  Mogoson
+ *  Version      :  0.1.0
+ *  Date         :  5/28/2017
+ *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace Developer.Camera
-{
-    using UnityEngine;
+using UnityEngine;
 
+namespace Developer.CameraExtension
+{
     [RequireComponent(typeof(AroundAlignCamera))]
-    [AddComponentMenu("Developer/Camera/MouseFocus")]
+    [AddComponentMenu("Developer/CameraExtension/MouseFocus")]
     public class MouseFocus : MonoBehaviour
     {
         #region Property and Field
@@ -66,8 +59,7 @@ namespace Developer.Camera
 
         protected virtual void OnGUI()
         {
-            //Check mouse left button double click.
-            if (Event.current.isMouse && Event.current.button == 0 && Event.current.clickCount == 2)
+            if (CheckFocusEnter())
             {
                 var ray = targetCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hitInfo;
@@ -86,11 +78,31 @@ namespace Developer.Camera
                     }
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Escape))
+            else if (isFocus && CheckFocusExit())
             {
                 isFocus = false;
                 alignCamera.AlignVeiwToTarget(defaultAlign);
             }
+        }
+
+        /// <summary>
+        /// Check enter focus state.
+        /// </summary>
+        /// <returns>Is enter focus state.</returns>
+        protected virtual bool CheckFocusEnter()
+        {
+            //Mouse left button double click.
+            return Event.current.isMouse && Event.current.button == 0 && Event.current.clickCount == 2;
+        }
+
+        /// <summary>
+        /// Check exit focus state.
+        /// </summary>
+        /// <returns>Is exit focus state.</returns>
+        protected virtual bool CheckFocusExit()
+        {
+            //Mouse right button double click.
+            return Event.current.isMouse && Event.current.button == 1 && Event.current.clickCount == 2;
         }
         #endregion
     }

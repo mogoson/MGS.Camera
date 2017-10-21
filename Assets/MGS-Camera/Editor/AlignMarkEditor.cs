@@ -1,47 +1,40 @@
 /*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
- *  FileName: AlignMarkEditor.cs
- *  Author: Mogoson   Version: 1.0   Date: 5/11/2017
- *  Version Description:
- *    Internal develop version,mainly to achieve its function.
- *  File Description:
- *    Ignore.
- *  Class List:
- *    <ID>           <name>             <description>
- *     1.        AlignMarkEditor           Ignore.
- *  Function List:
- *    <class ID>     <name>             <description>
- *     1.
- *  History:
- *    <ID>    <author>      <time>      <version>      <description>
- *     1.     Mogoson     5/11/2017       1.0        Build this file.
+ *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+ *------------------------------------------------------------------------
+ *  File         :  AlignMarkEditor.cs
+ *  Description  :  Custom editor for AlignMarkEditor.
+ *------------------------------------------------------------------------
+ *  Author       :  Mogoson
+ *  Version      :  0.1.0
+ *  Date         :  5/11/2017
+ *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace Developer.Camera
-{
-    using UnityEditor;
-    using UnityEngine;
+using UnityEditor;
+using UnityEngine;
 
+namespace Developer.CameraExtension
+{
     [CustomEditor(typeof(AlignMark), true)]
     [CanEditMultipleObjects]
     public class AlignMarkEditor : CameraEditor
     {
         #region Property and Field
         protected AlignMark script { get { return target as AlignMark; } }
+        protected const string previewCameraName = "PreviewCamera";
         protected Camera previewCamera;
-        protected RenderTexture previewTexture;
         #endregion
 
         #region Protected Method
         protected virtual void OnEnable()
         {
-            var preview = GameObject.Find("PreviewCamera");
+            var preview = GameObject.Find(previewCameraName);
             if (preview)
                 previewCamera = preview.GetComponent<Camera>();
             else
             {
-                previewCamera = new GameObject("PreviewCamera").AddComponent<Camera>();
-                previewTexture = new RenderTexture(210, 140, 16);
+                var previewTexture = new RenderTexture(240, 180, 16);
+                previewCamera = new GameObject(previewCameraName).AddComponent<Camera>();
                 previewCamera.targetTexture = previewTexture;
             }
             previewCamera.transform.parent = script.transform;
@@ -50,13 +43,17 @@ namespace Developer.Camera
         protected virtual void OnDisable()
         {
             if (Selection.activeGameObject == null || Selection.activeGameObject.GetComponent<AlignMark>() == null)
+            {
                 DestroyImmediate(previewCamera.gameObject, true);
+                EditorUtility.UnloadUnusedAssetsImmediate(true);
+            }
         }
 
         protected virtual void OnSceneGUI()
         {
             if (script.alignTarget.center == null)
                 return;
+
             DrawPositionHandle(script.alignTarget.center);
 
             previewCamera.transform.rotation = Quaternion.Euler(script.alignTarget.angles);
@@ -64,7 +61,7 @@ namespace Developer.Camera
 
             GUI.color = Handles.color = blue;
             Handles.Label(script.alignTarget.center.position, "Center");
-            Handles.SphereCap(0, script.alignTarget.center.position, Quaternion.identity, nodeSize);
+            DrawSphereCap(script.alignTarget.center.position, Quaternion.identity, nodeSize);
             DrawArrow(script.alignTarget.center.position, previewCamera.transform.position, nodeSize, "Camera", blue);
             DrawArrow(script.alignTarget.center.position, -previewCamera.transform.forward, script.alignTarget.distanceRange.min, nodeSize, "Min", blue);
             DrawArrow(script.alignTarget.center.position, -previewCamera.transform.forward, script.alignTarget.distanceRange.max, nodeSize, "Max", blue);
@@ -75,7 +72,7 @@ namespace Developer.Camera
         protected virtual void DrawSceneTool()
         {
             GUI.color = Color.white;
-            var rect = new Rect(Screen.width - 230, Screen.height - 215, 220, 165);
+            var rect = new Rect(Screen.width - 260, Screen.height - 255, 250, 205);
             Handles.BeginGUI();
             GUILayout.BeginArea(rect, "Camera Align Preview", "Window");
             GUILayout.Label(previewCamera.targetTexture);

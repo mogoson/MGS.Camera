@@ -1,37 +1,34 @@
 /*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
- *  FileName: CameraEditor.cs
- *  Author: Mogoson   Version: 1.0   Date: 4/28/2017
- *  Version Description:
- *    Internal develop version,mainly to achieve its function.
- *  File Description:
- *    Ignore.
- *  Class List:
- *    <ID>           <name>             <description>
- *     1.         CameraEditor             Ignore.
- *  Function List:
- *    <class ID>     <name>             <description>
- *     1.
- *  History:
- *    <ID>    <author>      <time>      <version>      <description>
- *     1.     Mogoson     4/28/2017       1.0        Build this file.
+ *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+ *------------------------------------------------------------------------
+ *  File         :  CameraEditor.cs
+ *  Description  :  Custom editor for camera.
+ *------------------------------------------------------------------------
+ *  Author       :  Mogoson
+ *  Version      :  0.1.0
+ *  Date         :  4/28/2017
+ *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace Developer.Camera
-{
-    using UnityEditor;
-    using UnityEngine;
+using UnityEditor;
+using UnityEngine;
 
+#if UNITY_5_3_OR_NEWER
+using UnityEditor.SceneManagement;
+#endif
+
+namespace Developer.CameraExtension
+{
     public class CameraEditor : Editor
     {
         #region Property and Field
-        protected Color blue = new Color(0, 1, 1, 1);
-        protected Color transparentBlue = new Color(0, 1, 1, 0.1f);
+        protected readonly Color blue = new Color(0, 1, 1, 1);
+        protected readonly Color transparentBlue = new Color(0, 1, 1, 0.1f);
 
-        protected float nodeSize = 0.05f;
-        protected float arrowLength = 0.75f;
-        protected float lineLength = 10;
-        protected float areaRadius = 0.5f;
+        protected const float nodeSize = 0.05f;
+        protected const float arrowLength = 0.75f;
+        protected const float lineLength = 10;
+        protected const float areaRadius = 0.5f;
         #endregion
 
         #region Protected Method
@@ -43,7 +40,7 @@ namespace Developer.Camera
             GUI.color = Handles.color = color;
 
             Handles.DrawLine(start, end);
-            Handles.SphereCap(0, end, Quaternion.identity, size);
+            DrawSphereCap(end, Quaternion.identity, size);
             Handles.Label(end, text);
 
             GUI.color = gC;
@@ -73,6 +70,24 @@ namespace Developer.Camera
                 return transform.rotation;
             else
                 return Quaternion.identity;
+        }
+
+        protected void DrawSphereCap(Vector3 position, Quaternion rotation, float size)
+        {
+#if UNITY_5_5_OR_NEWER
+            Handles.SphereHandleCap(0, position, rotation, size, EventType.Ignore);
+#else
+            Handles.SphereCap(0, position, rotation, size);
+#endif
+        }
+
+        protected void MarkSceneDirty()
+        {
+#if UNITY_5_3_OR_NEWER
+            EditorSceneManager.MarkAllScenesDirty();
+#else
+            EditorApplication.MarkSceneDirty();
+#endif
         }
         #endregion
     }

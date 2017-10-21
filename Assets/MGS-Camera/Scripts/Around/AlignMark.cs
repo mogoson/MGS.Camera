@@ -1,27 +1,20 @@
 /*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
- *  FileName: AlignMark.cs
- *  Author: Mogoson   Version: 1.0   Date: 5/11/2017
- *  Version Description:
- *    Internal develop version,mainly to achieve its function.
- *  File Description:
- *    Ignore.
- *  Class List:
- *    <ID>           <name>             <description>
- *     1.          AlignMark               Ignore.
- *  Function List:
- *    <class ID>     <name>             <description>
- *     1.
- *  History:
- *    <ID>    <author>      <time>      <version>      <description>
- *     1.     Mogoson     5/11/2017       1.0        Build this file.
+ *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+ *------------------------------------------------------------------------
+ *  File         :  AlignMark.cs
+ *  Description  :  Mark a gameobject for camera to align to it.
+ *------------------------------------------------------------------------
+ *  Author       :  Mogoson
+ *  Version      :  0.1.0
+ *  Date         :  5/11/2017
+ *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace Developer.Camera
-{
-    using UnityEngine;
+using UnityEngine;
 
-    [AddComponentMenu("Developer/Camera/AlignMark")]
+namespace Developer.CameraExtension
+{
+    [AddComponentMenu("Developer/CameraExtension/AlignMark")]
     public class AlignMark : MonoBehaviour
     {
         #region Property and Field

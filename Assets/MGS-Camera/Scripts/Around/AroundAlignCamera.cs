@@ -1,32 +1,25 @@
 /*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
- *  FileName: AroundAlignCamera.cs
- *  Author: Mogoson   Version: 1.0   Date: 4/27/2017
- *  Version Description:
- *    Internal develop version,mainly to achieve its function.
- *  File Description:
- *    Ignore.
- *  Class List:
- *    <ID>           <name>             <description>
- *     1.       AroundAlignCamera          Ignore.
- *  Function List:
- *    <class ID>     <name>             <description>
- *     1.
- *  History:
- *    <ID>    <author>      <time>      <version>      <description>
- *     1.     Mogoson     4/27/2017       1.0        Build this file.
+ *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+ *------------------------------------------------------------------------
+ *  File         :  AroundAlignCamera.cs
+ *  Description  :  Camera rotate around and align to target gameobject.
+ *------------------------------------------------------------------------
+ *  Author       :  Mogoson
+ *  Version      :  0.1.0
+ *  Date         :  4/27/2017
+ *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace Developer.Camera
-{
-    using UnityEngine;
+using UnityEngine;
 
+namespace Developer.CameraExtension
+{
     /// <summary>
     /// Camera Align Event.
     /// </summary>
     public delegate void AlignEvent();
 
-    [AddComponentMenu("Developer/Camera/AroundAlignCamera")]
+    [AddComponentMenu("Developer/CameraExtension/AroundAlignCamera")]
     public class AroundAlignCamera : AroundCamera
     {
         #region Property and Field
@@ -50,12 +43,12 @@ namespace Developer.Camera
         /// <summary>
         /// Start align event.
         /// </summary>
-        public AlignEvent alignStartEvent;
+        public AlignEvent OnAlignStart;
 
         /// <summary>
         /// End align event.
         /// </summary>
-        public AlignEvent alignEndEvent;
+        public AlignEvent OnAlignEnd;
 
         protected Vector2 lastAngles;
         protected Vector3 currentDirection, targetDirection, lastDirection;
@@ -89,8 +82,8 @@ namespace Developer.Camera
                 currentDistanceOffset < Vector3.kEpsilon)
             {
                 isAligning = false;
-                if (alignEndEvent != null)
-                    alignEndEvent();
+                if (OnAlignEnd != null)
+                    OnAlignEnd();
             }
             else
             {
@@ -168,8 +161,8 @@ namespace Developer.Camera
             //Start align.
             linearAdsorbent = false;
             isAligning = true;
-            if (alignStartEvent != null)
-                alignStartEvent();
+            if (OnAlignStart != null)
+                OnAlignStart();
         }
 
         /// <summary>

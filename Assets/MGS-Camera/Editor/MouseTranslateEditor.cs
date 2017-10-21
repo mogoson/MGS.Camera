@@ -1,40 +1,45 @@
 /*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
- *  FileName: MouseTranslateEditor.cs
- *  Author: Mogoson   Version: 1.0   Date: 4/28/2017
- *  Version Description:
- *    Internal develop version,mainly to achieve its function.
- *  File Description:
- *    Ignore.
- *  Class List:
- *    <ID>           <name>             <description>
- *     1.      MouseTranslateEditor        Ignore.
- *  Function List:
- *    <class ID>     <name>             <description>
- *     1.
- *  History:
- *    <ID>    <author>      <time>      <version>      <description>
- *     1.     Mogoson     4/28/2017       1.0        Build this file.
+ *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+ *------------------------------------------------------------------------
+ *  File         :  MouseTranslateEditor.cs
+ *  Description  :  Custom editor for MouseTranslate.
+ *------------------------------------------------------------------------
+ *  Author       :  Mogoson
+ *  Version      :  0.1.0
+ *  Date         :  4/28/2017
+ *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace Developer.Camera
-{
-    using UnityEditor;
-    using UnityEngine;
+using UnityEditor;
+using UnityEngine;
 
+namespace Developer.CameraExtension
+{
     [CustomEditor(typeof(MouseTranslate), true)]
     [CanEditMultipleObjects]
     public class MouseTranslateEditor : CameraEditor
     {
         #region Property and Field
         protected MouseTranslate script { get { return target as MouseTranslate; } }
+        protected Vector3 offset;
         #endregion
 
         #region Protected Method
+        protected virtual void OnEnable()
+        {
+            if (script.areaSettings.center == null)
+                return;
+            offset = script.transform.position - script.areaSettings.center.position;
+        }
+
         protected virtual void OnSceneGUI()
         {
             if (script.areaSettings.center == null)
                 return;
+
+            if (!Application.isPlaying)
+                script.transform.position = script.areaSettings.center.position + offset;
+
             DrawPositionHandle(script.areaSettings.center);
 
             var widthOffset = Vector3.right * script.areaSettings.width;
@@ -48,8 +53,8 @@ namespace Developer.Camera
 
             GUI.color = Handles.color = blue;
             Handles.Label(script.areaSettings.center.position, "Center");
-            Handles.SphereCap(0, script.areaSettings.center.position, Quaternion.identity, nodeSize);
-            Handles.SphereCap(0, script.transform.position, Quaternion.identity, nodeSize);
+            DrawSphereCap(script.areaSettings.center.position, Quaternion.identity, nodeSize);
+            DrawSphereCap(script.transform.position, Quaternion.identity, nodeSize);
             Handles.DrawSolidRectangleWithOutline(verts, transparentBlue, blue);
 
             var project = new Vector3(script.transform.position.x, script.areaSettings.center.position.y, script.transform.position.z);
@@ -67,10 +72,18 @@ namespace Developer.Camera
         protected virtual void DrawSceneTool()
         {
             GUI.color = Color.white;
-            var rect = new Rect(10, Screen.height - 90, 170, 40);
+            var rect = new Rect(10, Screen.height - 90, 225, 40);
             Handles.BeginGUI();
             GUILayout.BeginArea(rect, "Current Offset", "Window");
-            GUILayout.Label((script.transform.position - script.areaSettings.center.position).ToString());
+            if (Application.isPlaying)
+                EditorGUILayout.Vector3Field(string.Empty, script.currentOffset);
+            else
+            {
+                EditorGUI.BeginChangeCheck();
+                offset = EditorGUILayout.Vector3Field(string.Empty, offset);
+                if (EditorGUI.EndChangeCheck())
+                    MarkSceneDirty();
+            }
             GUILayout.EndArea();
             Handles.EndGUI();
         }

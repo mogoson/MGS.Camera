@@ -1,19 +1,60 @@
 ==========================================================================
-  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
+  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
   Name: MGS-Camera
-  Author: Mogoson   Version: 1.0   Date: 6/1/2017
+  Author: Mogoson   Version: 0.1.0   Date: 6/1/2017
 ==========================================================================
-  [Summeray]
-    This package can be used to binding camera in Unity3D scene.
+  [Summary]
+    Unity plugin for control camera in scene.
+--------------------------------------------------------------------------
+  [Demand]
+    Translate camera by mouse pointer drag.
+    Camera rotate around target gameobject.
+    Camera smooth align to mark gameobject.
 --------------------------------------------------------------------------
   [Environment]
-    Package applies to Unity3D 5.0, .Net Framework 3.0 or above version.
+    Unity 5.0 or above.
+    .Net Framework 3.0 or above.
+--------------------------------------------------------------------------
+  [Achieve]
+    MouseTranslate : Translate gameobject by mouse pointer drag.
+
+    AroundCamera : Camera rotate around target gameobject.
+
+    AroundAlignCamera : Camera rotate around target gameobject and
+    align to mark gameobject.
+
+    MouseFocus : Align camera to gameobject on mouse pointer double
+    click it.
+
+    AlignMark : Mark gameobject as align target and config align
+    parameters.
 --------------------------------------------------------------------------
   [Usage]
-    Find the demos in the path "MGS-Camera/Scenes".
-    Understand the usages of component scripts in the demos.
-    Use the compnent scripts in your project.
+    Reference the demos to use the components in your project.
+
+    If a camera attached the AroundCamera or AroundAlignCamera component
+    and is configured and selected, the "Current Around" panel will
+    display in the lower left quarter of the scene window.
+    Use it to set the default position and rotation of camera base on the
+    around target in editor mode.
+
+    If a gameobject attached the MouseTranslate component and is
+    configured and selected, the "Current Offset" panel will display in
+    the lower left quarter of the scene window.
+    Use it to set the default position of gameobject base on the area
+    center in editor mode.
+
+    If a gameobject attached the AlignMark component and is selected, the
+    "Camera Align Preview" panel will display in the lower right quarter
+    of the scene window.
+    Reference it to config the parameters of AlignMark component.
+--------------------------------------------------------------------------
+  [Demo]
+    Demos in the path "MGS-Camera/Scenes" provide reference to you.
+--------------------------------------------------------------------------
+  [Resource]
+    https://github.com/mogoson/MGS-Camera.
 --------------------------------------------------------------------------
   [Contact]
-    If you have any questions, feel free to contact me at mogoson@qq.com.
+    If you have any questions, fell free to contact me at mogoson@qq.com.
 --------------------------------------------------------------------------

@@ -1,28 +1,20 @@
 /*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
- *  FileName: AroundCameraEditor.cs
- *  Author: Mogoson   Version: 1.0   Date: 4/28/2017
- *  Version Description:
- *    Internal develop version,mainly to achieve its function.
- *  File Description:
- *    Ignore.
- *  Class List:
- *    <ID>           <name>             <description>
- *     1.       AroundCameraEditor         Ignore.
- *  Function List:
- *    <class ID>     <name>             <description>
- *     1.
- *  History:
- *    <ID>    <author>      <time>      <version>      <description>
- *     1.     Mogoson     4/28/2017       1.0        Build this file.
+ *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+ *------------------------------------------------------------------------
+ *  File         :  AroundCameraEditor.cs
+ *  Description  :  Custom editor for AroundCamera.
+ *------------------------------------------------------------------------
+ *  Author       :  Mogoson
+ *  Version      :  0.1.0
+ *  Date         :  4/28/2017
+ *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace Developer.Camera
-{
-    using UnityEditor;
-    using UnityEditor.SceneManagement;
-    using UnityEngine;
+using UnityEditor;
+using UnityEngine;
 
+namespace Developer.CameraExtension
+{
     [CustomEditor(typeof(AroundCamera), true)]
     [CanEditMultipleObjects]
     public class AroundCameraEditor : CameraEditor
@@ -46,6 +38,7 @@ namespace Developer.Camera
         {
             if (script.target == null)
                 return;
+
             if (!Application.isPlaying)
             {
                 script.transform.rotation = Quaternion.Euler(angles);
@@ -53,7 +46,7 @@ namespace Developer.Camera
             }
 
             GUI.color = Handles.color = blue;
-            Handles.SphereCap(0, script.target.position, Quaternion.identity, nodeSize);
+            DrawSphereCap(script.target.position, Quaternion.identity, nodeSize);
             Handles.Label(script.target.position, "Target");
             var direction = (script.transform.position - script.target.position).normalized;
             DrawArrow(script.target.position, script.transform.position, nodeSize, string.Empty, blue);
@@ -66,33 +59,22 @@ namespace Developer.Camera
         protected virtual void DrawSceneTool()
         {
             GUI.color = Color.white;
-            var rect = new Rect(10, Screen.height - 110, 170, 60);
+            var rect = new Rect(10, Screen.height - 125, 225, 75);
             Handles.BeginGUI();
             GUILayout.BeginArea(rect, "Current Around", "Window");
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Angles:");
-            EditorGUI.BeginChangeCheck();
             if (Application.isPlaying)
             {
-                GUILayout.Label(script.currentAngles.x.ToString("F2"));
-                GUILayout.Label(script.currentAngles.y.ToString("F2"));
+                EditorGUILayout.Vector2Field("Angles", script.currentAngles);
+                EditorGUILayout.FloatField("Distance", script.currentDistance);
             }
             else
             {
-                angles.x = float.Parse(GUILayout.TextField(angles.x.ToString("F2")));
-                angles.y = float.Parse(GUILayout.TextField(angles.y.ToString("F2")));
+                EditorGUI.BeginChangeCheck();
+                angles = EditorGUILayout.Vector2Field("Angles", angles);
+                distance = EditorGUILayout.FloatField("Distance", distance);
+                if (EditorGUI.EndChangeCheck())
+                    MarkSceneDirty();
             }
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Distance:");
-            if (Application.isPlaying)
-                GUILayout.Label(script.currentDistance.ToString("F2"));
-            else
-                distance = float.Parse(GUILayout.TextField(distance.ToString("F2")));
-            if (EditorGUI.EndChangeCheck())
-                EditorSceneManager.MarkAllScenesDirty();
-            GUILayout.EndHorizontal();
             GUILayout.EndArea();
             Handles.EndGUI();
         }

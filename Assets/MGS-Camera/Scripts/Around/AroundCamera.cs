@@ -1,28 +1,21 @@
 /*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
- *  FileName: AroundCamera.cs
- *  Author: Mogoson   Version: 1.0   Date: 4/27/2017
- *  Version Description:
- *    Internal develop version,mainly to achieve its function.
- *  File Description:
- *    Ignore.
- *  Class List:
- *    <ID>           <name>             <description>
- *     1.         AroundCamera             Ignore.
- *  Function List:
- *    <class ID>     <name>             <description>
- *     1.
- *  History:
- *    <ID>    <author>      <time>      <version>      <description>
- *     1.     Mogoson     4/27/2017       1.0        Build this file.
+ *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+ *------------------------------------------------------------------------
+ *  File         :  AroundCamera.cs
+ *  Description  :  Camera rotate around target gameobject.
+ *------------------------------------------------------------------------
+ *  Author       :  Mogoson
+ *  Version      :  0.1.0
+ *  Date         :  4/27/2017
+ *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace Developer.Camera
-{
-    using UnityEngine;
+using UnityEngine;
 
+namespace Developer.CameraExtension
+{
     [RequireComponent(typeof(Camera))]
-    [AddComponentMenu("Developer/Camera/AroundCamera")]
+    [AddComponentMenu("Developer/CameraExtension/AroundCamera")]
     public class AroundCamera : MonoBehaviour
     {
         #region Property and Field

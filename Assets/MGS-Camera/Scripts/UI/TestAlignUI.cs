@@ -1,27 +1,20 @@
 /*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson tech. Co., Ltd.
- *  FileName: TestAlignUI.cs
- *  Author: Mogoson   Version: 1.0   Date: 5/11/2017
- *  Version Description:
- *    Internal develop version,mainly to achieve its function.
- *  File Description:
- *    Ignore.
- *  Class List:
- *    <ID>           <name>             <description>
- *     1.          TestAlignUI             Ignore.
- *  Function List:
- *    <class ID>     <name>             <description>
- *     1.
- *  History:
- *    <ID>    <author>      <time>      <version>      <description>
- *     1.     Mogoson     5/11/2017       1.0        Build this file.
+ *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+ *------------------------------------------------------------------------
+ *  File         :  TestAlignUI.cs
+ *  Description  :  Draw scene UI to control camera align to alignMarks.
+ *------------------------------------------------------------------------
+ *  Author       :  Mogoson
+ *  Version      :  0.1.0
+ *  Date         :  5/11/2017
+ *  Description  :  Initial development version.
  *************************************************************************/
 
-namespace Developer.Camera
-{
-    using UnityEngine;
+using UnityEngine;
 
-    [AddComponentMenu("Developer/Camera/TestAlignUI")]
+namespace Developer.CameraExtension
+{
+    [AddComponentMenu("Developer/CameraExtension/TestAlignUI")]
     public class TestAlignUI : MonoBehaviour
     {
         #region Property and Field
@@ -31,33 +24,47 @@ namespace Developer.Camera
         public AroundAlignCamera alignCamera;
         public AlignMark[] alignMarks = new AlignMark[3];
 
-        //Default align.
-        AlignTarget defaultAlign;
+        private AlignTarget defaultAlign;
+        private bool isAlign = false;
         #endregion
 
         #region Private Method
-        void Start()
-        {
-            defaultAlign = new AlignTarget(alignCamera.target, alignCamera.currentAngles,
-                alignCamera.currentDistance, alignCamera.angleRange, alignCamera.distanceRange);
-        }
-
-        void OnGUI()
+        private void OnGUI()
         {
             GUILayout.Space(yOffset);
             GUILayout.BeginHorizontal();
             GUILayout.Space(xOffset);
             GUILayout.BeginVertical();
-            if (GUILayout.Button("Back Default"))
-                alignCamera.AlignVeiwToTarget(defaultAlign);
-            if (GUILayout.Button("Align Target0"))
-                alignCamera.AlignVeiwToTarget(alignMarks[0].alignTarget);
-            if (GUILayout.Button("Align Target1"))
-                alignCamera.AlignVeiwToTarget(alignMarks[1].alignTarget);
-            if (GUILayout.Button("Align Target2"))
-                alignCamera.AlignVeiwToTarget(alignMarks[2].alignTarget);
+            if (GUILayout.Button("Back To Default"))
+                AlignCameraToDefault();
+            if (GUILayout.Button("Align To Mark 0"))
+                AlignCameraToMark(alignMarks[0]);
+            if (GUILayout.Button("Align To Mark 1"))
+                AlignCameraToMark(alignMarks[1]);
+            if (GUILayout.Button("Align To Mark 2"))
+                AlignCameraToMark(alignMarks[2]);
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
+        }
+
+        private void AlignCameraToMark(AlignMark alignMark)
+        {
+            if (isAlign == false)
+            {
+                isAlign = true;
+                defaultAlign = new AlignTarget(alignCamera.target, alignCamera.currentAngles,
+                alignCamera.currentDistance, alignCamera.angleRange, alignCamera.distanceRange);
+            }
+            alignCamera.AlignVeiwToTarget(alignMark.alignTarget);
+        }
+
+        private void AlignCameraToDefault()
+        {
+            if (isAlign)
+            {
+                isAlign = false;
+                alignCamera.AlignVeiwToTarget(defaultAlign);
+            }
         }
         #endregion
     }
