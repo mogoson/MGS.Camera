@@ -1,4 +1,4 @@
-# MGS-Camera
+﻿# MGS-Camera
 - [中文手册](./README_ZH.md)
 
 ## Summary
@@ -31,15 +31,15 @@
 ## Preview
 - Around
 
-![Around](./Attachments/Around.png)
-
-- Translate
-
-![Translate](./Attachments/Translate.png)
+![Around](./Attachments/Around.gif)
 
 - AlignPreview
 
-![AlignPreview](./Attachments/AlignPreview.png)﻿
+![AlignPreview](./Attachments/AlignPreview.gif)﻿
+
+- Focus
+
+![Focus](./Attachments/Focus.gif)
 
 ## Contact
-- If you have any questions, fell free to contact me at mogoson@qq.com.
+- If you have any questions, feel free to contact me at mogoson@qq.com.
