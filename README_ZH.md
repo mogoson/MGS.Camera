@@ -28,18 +28,18 @@
 ## 案例
 - “MGS-Camera/Scenes”目录下存有上述功能的演示案例，供读者参考。
 
-## 图示
+## 预览
 - Around
 
-![Around](./Attachments/Around.gif)
+![Around](./Attachments/README_Image/Around.gif)
 
 - AlignPreview
 
-![AlignPreview](./Attachments/AlignPreview.gif)﻿
+![AlignPreview](./Attachments/README_Image/AlignPreview.gif)﻿
 
 - Focus
 
-![Focus](./Attachments/Focus.gif)
+![Focus](./Attachments/README_Image/Focus.gif)
 
 ## 联系
 - 如果你有任何问题或者建议，欢迎通过mogoson@qq.com联系我。

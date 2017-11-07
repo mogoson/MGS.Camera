@@ -31,15 +31,15 @@
 ## Preview
 - Around
 
-![Around](./Attachments/Around.gif)
+![Around](./Attachments/README_Image/Around.gif)
 
 - AlignPreview
 
-![AlignPreview](./Attachments/AlignPreview.gif)﻿
+![AlignPreview](./Attachments/README_Image/AlignPreview.gif)﻿
 
 - Focus
 
-![Focus](./Attachments/Focus.gif)
+![Focus](./Attachments/README_Image/Focus.gif)
 
 ## Contact
 - If you have any questions, feel free to contact me at mogoson@qq.com.
