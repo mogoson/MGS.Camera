@@ -34,8 +34,8 @@ namespace Developer.CameraExtension
         #region Protected Method
         protected virtual void DrawArrow(Vector3 start, Vector3 end, float size, string text, Color color)
         {
-            var gC = GUI.color;
-            var hC = Handles.color;
+            var gColor = GUI.color;
+            var hColor = Handles.color;
 
             GUI.color = Handles.color = color;
 
@@ -43,8 +43,8 @@ namespace Developer.CameraExtension
             DrawSphereCap(end, Quaternion.identity, size);
             Handles.Label(end, text);
 
-            GUI.color = gC;
-            Handles.color = hC;
+            GUI.color = gColor;
+            Handles.color = hColor;
         }
 
         protected virtual void DrawArrow(Vector3 start, Vector3 direction, float length, float size, string text, Color color)
@@ -75,7 +75,8 @@ namespace Developer.CameraExtension
         protected void DrawSphereCap(Vector3 position, Quaternion rotation, float size)
         {
 #if UNITY_5_5_OR_NEWER
-            Handles.SphereHandleCap(0, position, rotation, size, EventType.Ignore);
+            if (Event.current.type == EventType.Repaint)
+                Handles.SphereHandleCap(0, position, rotation, size, EventType.Repaint);
 #else
             Handles.SphereCap(0, position, rotation, size);
 #endif

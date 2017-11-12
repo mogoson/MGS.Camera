@@ -30,6 +30,7 @@ namespace Developer.CameraExtension
         {
             if (script.target == null)
                 return;
+
             angles = script.transform.eulerAngles;
             distance = Vector3.Distance(script.transform.position, script.target.position);
         }
@@ -48,6 +49,7 @@ namespace Developer.CameraExtension
             GUI.color = Handles.color = blue;
             DrawSphereCap(script.target.position, Quaternion.identity, nodeSize);
             Handles.Label(script.target.position, "Target");
+
             var direction = (script.transform.position - script.target.position).normalized;
             DrawArrow(script.target.position, script.transform.position, nodeSize, string.Empty, blue);
             DrawArrow(script.target.position, direction, script.distanceRange.min, nodeSize, "Min", blue);
