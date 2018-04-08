@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+﻿/*************************************************************************
+ *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  CameraEditor.cs
  *  Description  :  Custom editor for camera.
@@ -17,11 +17,11 @@ using UnityEngine;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace Developer.CameraExtension
+namespace Mogoson.CameraExtension
 {
     public class CameraEditor : Editor
     {
-        #region Property and Field
+        #region Field and Property
         protected readonly Color blue = new Color(0, 1, 1, 1);
         protected readonly Color transparentBlue = new Color(0, 1, 1, 0.1f);
 

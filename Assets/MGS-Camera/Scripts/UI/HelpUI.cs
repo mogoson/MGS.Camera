@@ -1,26 +1,24 @@
-/*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+﻿/*************************************************************************
+ *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  HelpUI.cs
  *  Description  :  Draw scene UI to display help info.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  5/10/2017
+ *  Date         :  4/8/2018
  *  Description  :  Initial development version.
  *************************************************************************/
 
 using UnityEngine;
 
-namespace Developer.CameraExtension
+namespace Mogoson.CameraExtension
 {
-    [AddComponentMenu("Developer/CameraExtension/HelpUI")]
     public class HelpUI : MonoBehaviour
     {
-        #region Property and Field
+        #region Field and Property
         [Multiline]
         public string text = "Help info.";
-
         public float xOffset = 10;
         public float yOffset = 10;
         #endregion

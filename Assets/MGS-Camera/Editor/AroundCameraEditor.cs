@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+﻿/*************************************************************************
+ *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  AroundCameraEditor.cs
  *  Description  :  Custom editor for AroundCamera.
@@ -13,13 +13,13 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Developer.CameraExtension
+namespace Mogoson.CameraExtension
 {
     [CustomEditor(typeof(AroundCamera), true)]
     [CanEditMultipleObjects]
     public class AroundCameraEditor : CameraEditor
     {
-        #region Property and Field
+        #region Field and Property
         protected AroundCamera script { get { return target as AroundCamera; } }
         protected Vector2 angles;
         protected float distance;
@@ -66,8 +66,8 @@ namespace Developer.CameraExtension
             GUILayout.BeginArea(rect, "Current Around", "Window");
             if (Application.isPlaying)
             {
-                EditorGUILayout.Vector2Field("Angles", script.currentAngles);
-                EditorGUILayout.FloatField("Distance", script.currentDistance);
+                EditorGUILayout.Vector2Field("Angles", script.CurrentAngles);
+                EditorGUILayout.FloatField("Distance", script.CurrentDistance);
             }
             else
             {

@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+﻿/*************************************************************************
+ *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MouseTranslate.cs
  *  Description  :  Mouse pointer drag to translate gameobject.
@@ -12,12 +12,12 @@
 
 using UnityEngine;
 
-namespace Developer.CameraExtension
+namespace Mogoson.CameraExtension
 {
-    [AddComponentMenu("Developer/CameraExtension/MouseTranslate")]
+    [AddComponentMenu("Mogoson/CameraExtension/MouseTranslate")]
     public class MouseTranslate : MonoBehaviour
     {
-        #region Property and Field
+        #region Field and Property
         /// <summary>
         /// Target camera for translate direction.
         /// </summary>

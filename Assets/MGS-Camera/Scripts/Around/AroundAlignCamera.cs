@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+﻿/*************************************************************************
+ *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  AroundAlignCamera.cs
  *  Description  :  Camera rotate around and align to target gameobject.
@@ -10,19 +10,15 @@
  *  Description  :  Initial development version.
  *************************************************************************/
 
+using System;
 using UnityEngine;
 
-namespace Developer.CameraExtension
+namespace Mogoson.CameraExtension
 {
-    /// <summary>
-    /// Camera Align Event.
-    /// </summary>
-    public delegate void AlignEvent();
-
-    [AddComponentMenu("Developer/CameraExtension/AroundAlignCamera")]
+    [AddComponentMenu("Mogoson/CameraExtension/AroundAlignCamera")]
     public class AroundAlignCamera : AroundCamera
     {
-        #region Property and Field
+        #region Field and Property
         /// <summary>
         /// Damper for align.
         /// </summary>
@@ -38,17 +34,17 @@ namespace Developer.CameraExtension
         /// <summary>
         /// Camera is auto aligning.
         /// </summary>
-        public bool isAligning { protected set; get; }
+        public bool IsAligning { protected set; get; }
 
         /// <summary>
         /// Start align event.
         /// </summary>
-        public AlignEvent OnAlignStart;
+        public event Action OnAlignStart;
 
         /// <summary>
         /// End align event.
         /// </summary>
-        public AlignEvent OnAlignEnd;
+        public event Action OnAlignEnd;
 
         protected Vector2 lastAngles;
         protected Vector3 currentDirection, targetDirection, lastDirection;
@@ -61,10 +57,10 @@ namespace Developer.CameraExtension
         #region Protected Method
         protected override void LateUpdate()
         {
-            if (isAligning)
+            if (IsAligning)
                 AutoAlignView();
             else
-                CheckMouseInput();
+                AroundByMouseInput();
         }
 
         /// <summary>
@@ -73,53 +69,53 @@ namespace Developer.CameraExtension
         protected void AutoAlignView()
         {
             //Calculate current offset.
-            var currentAnglesOffset = (targetAngles - currentAngles).magnitude;
+            var currentAnglesOffset = (targetAngles - CurrentAngles).magnitude;
             var currentDirectionOffset = (targetDirection - currentDirection).magnitude;
-            var currentDistanceOffset = Mathf.Abs(targetDistance - currentDistance);
+            var currentDistanceOffset = Mathf.Abs(targetDistance - CurrentDistance);
 
             //Check align finish.
             if (currentAnglesOffset < Vector3.kEpsilon && currentDirectionOffset < Vector3.kEpsilon &&
                 currentDistanceOffset < Vector3.kEpsilon)
             {
-                isAligning = false;
+                IsAligning = false;
                 if (OnAlignEnd != null)
-                    OnAlignEnd();
+                    OnAlignEnd.Invoke();
             }
             else
             {
                 if (linearAdsorbent)
                 {
                     //MoveTowards to linear adsorbent align.
-                    currentAngles = Vector2.MoveTowards(currentAngles, targetAngles, anglesSpeed * Time.deltaTime);
+                    CurrentAngles = Vector2.MoveTowards(CurrentAngles, targetAngles, anglesSpeed * Time.deltaTime);
                     currentDirection = Vector3.MoveTowards(currentDirection, targetDirection, directionSpeed * Time.deltaTime);
-                    currentDistance = Mathf.MoveTowards(currentDistance, targetDistance, distanceSpeed * Time.deltaTime);
+                    CurrentDistance = Mathf.MoveTowards(CurrentDistance, targetDistance, distanceSpeed * Time.deltaTime);
                 }
                 else
                 {
                     //Record last.
-                    lastAngles = currentAngles;
+                    lastAngles = CurrentAngles;
                     lastDirection = currentDirection;
-                    lastDistance = currentDistance;
+                    lastDistance = CurrentDistance;
 
                     //Lerp to align.
-                    currentAngles = Vector2.Lerp(currentAngles, targetAngles, alignDamper * Time.deltaTime);
+                    CurrentAngles = Vector2.Lerp(CurrentAngles, targetAngles, alignDamper * Time.deltaTime);
                     currentDirection = Vector3.Lerp(currentDirection, targetDirection, alignDamper * Time.deltaTime);
-                    currentDistance = Mathf.Lerp(currentDistance, targetDistance, alignDamper * Time.deltaTime);
+                    CurrentDistance = Mathf.Lerp(CurrentDistance, targetDistance, alignDamper * Time.deltaTime);
 
                     //Check into linear adsorbent.
                     if (currentAnglesOffset / anglesOffset < threshold && currentDirectionOffset / directionOffset < threshold &&
                         currentDistanceOffset / distanceOffset < threshold)
                     {
-                        anglesSpeed = (currentAngles - lastAngles).magnitude / Time.deltaTime;
+                        anglesSpeed = (CurrentAngles - lastAngles).magnitude / Time.deltaTime;
                         directionSpeed = (currentDirection - lastDirection).magnitude / Time.deltaTime;
-                        distanceSpeed = Mathf.Abs(currentDistance - lastDistance) / Time.deltaTime;
+                        distanceSpeed = Mathf.Abs(CurrentDistance - lastDistance) / Time.deltaTime;
                         linearAdsorbent = true;
                     }
                 }
 
                 //Update position and rotation.
-                transform.position = target.position + currentDirection.normalized * currentDistance;
-                transform.rotation = Quaternion.Euler(currentAngles);
+                transform.position = target.position + currentDirection.normalized * CurrentDistance;
+                transform.rotation = Quaternion.Euler(CurrentAngles);
             }
         }
         #endregion
@@ -138,20 +134,20 @@ namespace Developer.CameraExtension
             targetDistance = distance;
 
             //Optimal angles.
-            while (targetAngles.y - currentAngles.y > 180)
+            while (targetAngles.y - CurrentAngles.y > 180)
                 targetAngles.y -= 360;
-            while (targetAngles.y - currentAngles.y < -180)
+            while (targetAngles.y - CurrentAngles.y < -180)
                 targetAngles.y += 360;
 
             //Calculate lerp parameter.
-            currentDistance = Vector3.Distance(transform.position, target.position);
+            CurrentDistance = Vector3.Distance(transform.position, target.position);
             currentDirection = (transform.position - target.position).normalized;
             targetDirection = (Quaternion.Euler(targetAngles) * Vector3.back).normalized;
 
             //Calculate offset.
-            anglesOffset = (targetAngles - currentAngles).magnitude;
+            anglesOffset = (targetAngles - CurrentAngles).magnitude;
             directionOffset = (targetDirection - currentDirection).magnitude;
-            distanceOffset = Mathf.Abs(targetDistance - currentDistance);
+            distanceOffset = Mathf.Abs(targetDistance - CurrentDistance);
 
             //Check zero value of offset.
             anglesOffset = anglesOffset > Vector3.kEpsilon ? anglesOffset : 1;
@@ -160,9 +156,9 @@ namespace Developer.CameraExtension
 
             //Start align.
             linearAdsorbent = false;
-            isAligning = true;
+            IsAligning = true;
             if (OnAlignStart != null)
-                OnAlignStart();
+                OnAlignStart.Invoke();
         }
 
         /// <summary>

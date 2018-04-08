@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+﻿/*************************************************************************
+ *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  AlignMarkEditor.cs
  *  Description  :  Custom editor for AlignMarkEditor.
@@ -13,13 +13,13 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Developer.CameraExtension
+namespace Mogoson.CameraExtension
 {
     [CustomEditor(typeof(AlignMark), true)]
     [CanEditMultipleObjects]
     public class AlignMarkEditor : CameraEditor
     {
-        #region Property and Field
+        #region Field and Property
         protected AlignMark script { get { return target as AlignMark; } }
         protected const string previewCameraName = "PreviewCamera";
         protected Camera previewCamera;

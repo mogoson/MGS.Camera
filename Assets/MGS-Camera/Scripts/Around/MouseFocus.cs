@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+﻿/*************************************************************************
+ *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MouseFocus.cs
  *  Description  :  Mouse button click to align camera to target.
@@ -12,13 +12,13 @@
 
 using UnityEngine;
 
-namespace Developer.CameraExtension
+namespace Mogoson.CameraExtension
 {
     [RequireComponent(typeof(AroundAlignCamera))]
-    [AddComponentMenu("Developer/CameraExtension/MouseFocus")]
+    [AddComponentMenu("Mogoson/CameraExtension/MouseFocus")]
     public class MouseFocus : MonoBehaviour
     {
-        #region Property and Field
+        #region Field and Property
         /// <summary>
         /// Layer of ray.
         /// </summary>
@@ -71,8 +71,8 @@ namespace Developer.CameraExtension
                         if (isFocus == false)
                         {
                             isFocus = true;
-                            defaultAlign = new AlignTarget(alignCamera.target, alignCamera.currentAngles,
-                                alignCamera.currentDistance, alignCamera.angleRange, alignCamera.distanceRange);
+                            defaultAlign = new AlignTarget(alignCamera.target, alignCamera.CurrentAngles,
+                                alignCamera.CurrentDistance, alignCamera.angleRange, alignCamera.distanceRange);
                         }
                         alignCamera.AlignVeiwToTarget(alignMark.alignTarget);
                     }

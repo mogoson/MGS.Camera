@@ -1,8 +1,8 @@
-/*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+﻿/*************************************************************************
+ *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  AlignMark.cs
- *  Description  :  Mark a gameobject for camera to align to it.
+ *  Description  :  Mark a gameobject for camera align to it.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
@@ -12,14 +12,14 @@
 
 using UnityEngine;
 
-namespace Developer.CameraExtension
+namespace Mogoson.CameraExtension
 {
-    [AddComponentMenu("Developer/CameraExtension/AlignMark")]
+    [AddComponentMenu("Mogoson/CameraExtension/AlignMark")]
     public class AlignMark : MonoBehaviour
     {
-        #region Property and Field
+        #region Field and Property
         /// <summary>
-        /// Target of camera align to center.
+        /// Target of camera align.
         /// </summary>
         public AlignTarget alignTarget;
         #endregion

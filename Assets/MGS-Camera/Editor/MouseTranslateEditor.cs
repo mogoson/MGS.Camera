@@ -1,5 +1,5 @@
-/*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+﻿/*************************************************************************
+ *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MouseTranslateEditor.cs
  *  Description  :  Custom editor for MouseTranslate.
@@ -13,13 +13,13 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Developer.CameraExtension
+namespace Mogoson.CameraExtension
 {
     [CustomEditor(typeof(MouseTranslate), true)]
     [CanEditMultipleObjects]
     public class MouseTranslateEditor : CameraEditor
     {
-        #region Property and Field
+        #region Field and Property
         protected MouseTranslate script { get { return target as MouseTranslate; } }
         protected Vector3 offset;
         #endregion

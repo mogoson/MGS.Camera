@@ -1,23 +1,22 @@
-/*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+﻿/*************************************************************************
+ *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  TestAlignUI.cs
  *  Description  :  Draw scene UI to control camera align to alignMarks.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  5/11/2017
+ *  Date         :  4/8/2018
  *  Description  :  Initial development version.
  *************************************************************************/
 
 using UnityEngine;
 
-namespace Developer.CameraExtension
+namespace Mogoson.CameraExtension
 {
-    [AddComponentMenu("Developer/CameraExtension/TestAlignUI")]
     public class TestAlignUI : MonoBehaviour
     {
-        #region Property and Field
+        #region Field and Property
         public float xOffset = 10;
         public float yOffset = 10;
 
@@ -52,8 +51,8 @@ namespace Developer.CameraExtension
             if (isAlign == false)
             {
                 isAlign = true;
-                defaultAlign = new AlignTarget(alignCamera.target, alignCamera.currentAngles,
-                alignCamera.currentDistance, alignCamera.angleRange, alignCamera.distanceRange);
+                defaultAlign = new AlignTarget(alignCamera.target, alignCamera.CurrentAngles,
+                alignCamera.CurrentDistance, alignCamera.angleRange, alignCamera.distanceRange);
             }
             alignCamera.AlignVeiwToTarget(alignMark.alignTarget);
         }

@@ -1,24 +1,24 @@
-/*************************************************************************
- *  Copyright (C), 2017-2018, Mogoson Tech. Co., Ltd.
+﻿/*************************************************************************
+ *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  AroundCamera.cs
  *  Description  :  Camera rotate around target gameobject.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  4/27/2017
+ *  Date         :  4/8/2018
  *  Description  :  Initial development version.
  *************************************************************************/
 
 using UnityEngine;
 
-namespace Developer.CameraExtension
+namespace Mogoson.CameraExtension
 {
+    [AddComponentMenu("Mogoson/CameraExtension/AroundCamera")]
     [RequireComponent(typeof(Camera))]
-    [AddComponentMenu("Developer/CameraExtension/AroundCamera")]
     public class AroundCamera : MonoBehaviour
     {
-        #region Property and Field
+        #region Field and Property
         /// <summary>
         /// Around center.
         /// </summary>
@@ -48,12 +48,12 @@ namespace Developer.CameraExtension
         /// <summary>
         /// Camera current angls.
         /// </summary>
-        public Vector2 currentAngles { protected set; get; }
+        public Vector2 CurrentAngles { protected set; get; }
 
         /// <summary>
         /// Current distance from camera to target.
         /// </summary>
-        public float currentDistance { protected set; get; }
+        public float CurrentDistance { protected set; get; }
 
         /// <summary>
         /// Camera target angls.
@@ -69,19 +69,19 @@ namespace Developer.CameraExtension
         #region Protected Method
         protected virtual void Start()
         {
-            currentAngles = targetAngles = transform.eulerAngles;
-            currentDistance = targetDistance = Vector3.Distance(transform.position, target.position);
+            CurrentAngles = targetAngles = transform.eulerAngles;
+            CurrentDistance = targetDistance = Vector3.Distance(transform.position, target.position);
         }
 
         protected virtual void LateUpdate()
         {
-            CheckMouseInput();
+            AroundByMouseInput();
         }
 
         /// <summary>
-        /// Check and deal with mouse input. 
+        /// Camera around target by mouse input.
         /// </summary>
-        protected void CheckMouseInput()
+        protected void AroundByMouseInput()
         {
             if (Input.GetMouseButton(mouseSettings.mouseButtonID))
             {
@@ -98,12 +98,12 @@ namespace Developer.CameraExtension
             targetDistance = Mathf.Clamp(targetDistance, distanceRange.min, distanceRange.max);
 
             //Lerp.
-            currentAngles = Vector2.Lerp(currentAngles, targetAngles, damper * Time.deltaTime);
-            currentDistance = Mathf.Lerp(currentDistance, targetDistance, damper * Time.deltaTime);
+            CurrentAngles = Vector2.Lerp(CurrentAngles, targetAngles, damper * Time.deltaTime);
+            CurrentDistance = Mathf.Lerp(CurrentDistance, targetDistance, damper * Time.deltaTime);
 
             //Update transform position and rotation.
-            transform.rotation = Quaternion.Euler(currentAngles);
-            transform.position = target.position - transform.forward * currentDistance;
+            transform.rotation = Quaternion.Euler(CurrentAngles);
+            transform.position = target.position - transform.forward * CurrentDistance;
         }
         #endregion
     }
