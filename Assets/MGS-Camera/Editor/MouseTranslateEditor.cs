@@ -6,7 +6,7 @@
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  4/28/2017
+ *  Date         :  4/9/2018
  *  Description  :  Initial development version.
  *************************************************************************/
 
@@ -17,66 +17,70 @@ namespace Mogoson.CameraExtension
 {
     [CustomEditor(typeof(MouseTranslate), true)]
     [CanEditMultipleObjects]
-    public class MouseTranslateEditor : CameraEditor
+    public class MouseTranslateEditor : BaseEditor
     {
         #region Field and Property
-        protected MouseTranslate script { get { return target as MouseTranslate; } }
+        protected MouseTranslate Target { get { return target as MouseTranslate; } }
         protected Vector3 offset;
         #endregion
 
         #region Protected Method
         protected virtual void OnEnable()
         {
-            if (script.areaSettings.center == null)
+            if (Target.areaSettings.center == null)
                 return;
-            offset = script.transform.position - script.areaSettings.center.position;
+            offset = Target.transform.position - Target.areaSettings.center.position;
         }
 
         protected virtual void OnSceneGUI()
         {
-            if (script.areaSettings.center == null)
+            if (Target.areaSettings.center == null)
                 return;
 
             if (!Application.isPlaying)
-                script.transform.position = script.areaSettings.center.position + offset;
+                Target.transform.position = Target.areaSettings.center.position + offset;
 
-            DrawPositionHandle(script.areaSettings.center);
+            DrawPositionHandle(Target.areaSettings.center);
 
-            var widthOffset = Vector3.right * script.areaSettings.width;
-            var lengthOffset = Vector3.forward * script.areaSettings.length;
+            var widthOffset = Vector3.right * Target.areaSettings.width;
+            var lengthOffset = Vector3.forward * Target.areaSettings.length;
+            var verts = new Vector3[]
+            {
+                Target.areaSettings.center.position + widthOffset + lengthOffset,
+                Target.areaSettings.center.position - widthOffset + lengthOffset,
+                Target.areaSettings.center.position - widthOffset - lengthOffset,
+                Target.areaSettings.center.position + widthOffset - lengthOffset
+             };
 
-            var verts = new Vector3[4];
-            verts[0] = script.areaSettings.center.position + widthOffset + lengthOffset;
-            verts[1] = script.areaSettings.center.position - widthOffset + lengthOffset;
-            verts[2] = script.areaSettings.center.position - widthOffset - lengthOffset;
-            verts[3] = script.areaSettings.center.position + widthOffset - lengthOffset;
+            Handles.color = Blue;
+            var nodeSize = HandleUtility.GetHandleSize(Target.areaSettings.center.position) * NodeSize;
+            DrawSphereCap(Target.areaSettings.center.position, Quaternion.identity, nodeSize);
+            DrawSphereCap(Target.transform.position, Quaternion.identity, nodeSize);
+            Handles.DrawSolidRectangleWithOutline(verts, TransparentBlue, Blue);
 
-            GUI.color = Handles.color = blue;
-            Handles.Label(script.areaSettings.center.position, "Center");
-            DrawSphereCap(script.areaSettings.center.position, Quaternion.identity, nodeSize);
-            DrawSphereCap(script.transform.position, Quaternion.identity, nodeSize);
-            Handles.DrawSolidRectangleWithOutline(verts, transparentBlue, blue);
+            var project = new Vector3(Target.transform.position.x, Target.areaSettings.center.position.y, Target.transform.position.z);
+            DrawSphereArrow(Target.transform.position, project, nodeSize, Blue, string.Empty);
+            Handles.DrawLine(new Vector3(verts[0].x, verts[0].y, Target.transform.position.z), new Vector3(verts[1].x, verts[1].y, Target.transform.position.z));
+            Handles.DrawLine(new Vector3(Target.transform.position.x, verts[0].y, verts[0].z), new Vector3(Target.transform.position.x, verts[3].y, verts[3].z));
 
-            var project = new Vector3(script.transform.position.x, script.areaSettings.center.position.y, script.transform.position.z);
-            DrawArrow(script.transform.position, project, nodeSize, string.Empty, blue);
-            Handles.DrawLine(new Vector3(verts[0].x, verts[0].y, script.transform.position.z), new Vector3(verts[1].x, verts[1].y, script.transform.position.z));
-            Handles.DrawLine(new Vector3(script.transform.position.x, verts[0].y, verts[0].z), new Vector3(script.transform.position.x, verts[3].y, verts[3].z));
+            GUI.color = Blue;
+            Handles.Label(Target.areaSettings.center.position, "Center");
 
-            if (script.targetCamera == null)
+            if (Target.targetCamera == null)
                 return;
-            DrawArrow(script.transform.position, script.targetCamera.position, nodeSize, string.Empty, blue);
 
+            DrawSphereArrow(Target.transform.position, Target.targetCamera.position, nodeSize, Blue, string.Empty);
             DrawSceneTool();
         }
 
         protected virtual void DrawSceneTool()
         {
-            GUI.color = Color.white;
             var rect = new Rect(10, Screen.height - 90, 225, 40);
+            GUI.color = Color.white;
             Handles.BeginGUI();
             GUILayout.BeginArea(rect, "Current Offset", "Window");
             if (Application.isPlaying)
-                EditorGUILayout.Vector3Field(string.Empty, script.currentOffset);
+                EditorGUILayout.Vector3Field(string.Empty, Target.CurrentOffset);
             else
             {
                 EditorGUI.BeginChangeCheck();

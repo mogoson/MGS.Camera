@@ -1,7 +1,7 @@
 ﻿==========================================================================
   Copyright © 2017-2018 Mogoson. All rights reserved.
   Name: MGS-Camera
-  Author: Mogoson   Version: 0.1.0   Date: 6/1/2017
+  Author: Mogoson   Version: 0.1.0   Date: 4/9/2018
 ==========================================================================
   [Summary]
     Unity plugin for control camera in scene.

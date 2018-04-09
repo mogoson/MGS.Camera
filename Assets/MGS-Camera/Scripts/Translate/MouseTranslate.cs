@@ -6,7 +6,7 @@
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  4/28/2017
+ *  Date         :  4/9/2018
  *  Description  :  Initial development version.
  *************************************************************************/
 
@@ -42,7 +42,7 @@ namespace Mogoson.CameraExtension
         /// <summary>
         /// Current offset base area center.
         /// </summary>
-        public Vector3 currentOffset { protected set; get; }
+        public Vector3 CurrentOffset { protected set; get; }
 
         /// <summary>
         /// Target offset base area center.
@@ -53,18 +53,18 @@ namespace Mogoson.CameraExtension
         #region Protected Method
         protected virtual void Start()
         {
-            currentOffset = targetOffset = transform.position - areaSettings.center.position;
+            CurrentOffset = targetOffset = transform.position - areaSettings.center.position;
         }
 
         protected virtual void Update()
         {
-            CheckMouseInput();
+            TranslateByMouseInput();
         }
 
         /// <summary>
-        /// Check and deal with mouse input. 
+        /// Translate this gameobject by mouse input.
         /// </summary>
-        protected void CheckMouseInput()
+        protected void TranslateByMouseInput()
         {
             if (Input.GetMouseButton(mouseSettings.mouseButtonID))
             {
@@ -82,8 +82,8 @@ namespace Mogoson.CameraExtension
             }
 
             //Lerp and update transform position.
-            currentOffset = Vector3.Lerp(currentOffset, targetOffset, damper * Time.deltaTime);
-            transform.position = areaSettings.center.position + currentOffset;
+            CurrentOffset = Vector3.Lerp(CurrentOffset, targetOffset, damper * Time.deltaTime);
+            transform.position = areaSettings.center.position + CurrentOffset;
         }
         #endregion
     }

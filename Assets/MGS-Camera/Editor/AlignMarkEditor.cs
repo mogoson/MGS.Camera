@@ -2,11 +2,11 @@
  *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  AlignMarkEditor.cs
- *  Description  :  Custom editor for AlignMarkEditor.
+ *  Description  :  Custom editor for AlignMark component.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  5/11/2017
+ *  Date         :  4/9/2018
  *  Description  :  Initial development version.
  *************************************************************************/
 
@@ -17,27 +17,26 @@ namespace Mogoson.CameraExtension
 {
     [CustomEditor(typeof(AlignMark), true)]
     [CanEditMultipleObjects]
-    public class AlignMarkEditor : CameraEditor
+    public class AlignMarkEditor : BaseEditor
     {
         #region Field and Property
-        protected AlignMark script { get { return target as AlignMark; } }
-        protected const string previewCameraName = "PreviewCamera";
+        protected AlignMark Target { get { return target as AlignMark; } }
+        protected const string PreviewCameraName = "PreviewCamera";
         protected Camera previewCamera;
         #endregion
 
         #region Protected Method
         protected virtual void OnEnable()
         {
-            var preview = GameObject.Find(previewCameraName);
+            var preview = GameObject.Find(PreviewCameraName);
             if (preview)
                 previewCamera = preview.GetComponent<Camera>();
             else
             {
-                var previewTexture = new RenderTexture(240, 180, 16);
-                previewCamera = new GameObject(previewCameraName).AddComponent<Camera>();
-                previewCamera.targetTexture = previewTexture;
+                previewCamera = new GameObject(PreviewCameraName).AddComponent<Camera>();
+                previewCamera.targetTexture = new RenderTexture(240, 180, 16);
             }
-            previewCamera.transform.parent = script.transform;
+            previewCamera.transform.parent = Target.transform;
         }
 
         protected virtual void OnDisable()
@@ -51,28 +50,30 @@ namespace Mogoson.CameraExtension
 
         protected virtual void OnSceneGUI()
         {
-            if (script.alignTarget.center == null)
+            if (Target.alignTarget.center == null)
                 return;
 
-            DrawPositionHandle(script.alignTarget.center);
+            DrawPositionHandle(Target.alignTarget.center);
+            previewCamera.transform.rotation = Quaternion.Euler(Target.alignTarget.angles);
+            previewCamera.transform.position = Target.alignTarget.center.position + previewCamera.transform.rotation * Vector3.back * Target.alignTarget.distance;
 
-            previewCamera.transform.rotation = Quaternion.Euler(script.alignTarget.angles);
-            previewCamera.transform.position = script.alignTarget.center.position + previewCamera.transform.rotation * Vector3.back * script.alignTarget.distance;
+            Handles.color = Blue;
+            var nodeSize = HandleUtility.GetHandleSize(Target.alignTarget.center.position) * NodeSize;
+            DrawSphereCap(Target.alignTarget.center.position, Quaternion.identity, nodeSize);
+            DrawSphereArrow(Target.alignTarget.center.position, previewCamera.transform.position, nodeSize, Blue, "Camera");
+            DrawSphereArrow(Target.alignTarget.center.position, -previewCamera.transform.forward, Target.alignTarget.distanceRange.min, nodeSize, Blue, "Min");
+            DrawSphereArrow(Target.alignTarget.center.position, -previewCamera.transform.forward, Target.alignTarget.distanceRange.max, nodeSize, Blue, "Max");
 
-            GUI.color = Handles.color = blue;
-            Handles.Label(script.alignTarget.center.position, "Center");
-            DrawSphereCap(script.alignTarget.center.position, Quaternion.identity, nodeSize);
-            DrawArrow(script.alignTarget.center.position, previewCamera.transform.position, nodeSize, "Camera", blue);
-            DrawArrow(script.alignTarget.center.position, -previewCamera.transform.forward, script.alignTarget.distanceRange.min, nodeSize, "Min", blue);
-            DrawArrow(script.alignTarget.center.position, -previewCamera.transform.forward, script.alignTarget.distanceRange.max, nodeSize, "Max", blue);
+            GUI.color = Blue;
+            Handles.Label(Target.alignTarget.center.position, "Center");
 
             DrawSceneTool();
         }
 
         protected virtual void DrawSceneTool()
         {
-            GUI.color = Color.white;
             var rect = new Rect(Screen.width - 260, Screen.height - 255, 250, 205);
+            GUI.color = Color.white;
             Handles.BeginGUI();
             GUILayout.BeginArea(rect, "Camera Align Preview", "Window");
             GUILayout.Label(previewCamera.targetTexture);

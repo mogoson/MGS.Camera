@@ -6,7 +6,7 @@
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  4/28/2017
+ *  Date         :  4/9/2018
  *  Description  :  Initial development version.
  *************************************************************************/
 
@@ -17,10 +17,10 @@ namespace Mogoson.CameraExtension
 {
     [CustomEditor(typeof(AroundCamera), true)]
     [CanEditMultipleObjects]
-    public class AroundCameraEditor : CameraEditor
+    public class AroundCameraEditor : BaseEditor
     {
         #region Field and Property
-        protected AroundCamera script { get { return target as AroundCamera; } }
+        protected AroundCamera Target { get { return target as AroundCamera; } }
         protected Vector2 angles;
         protected float distance;
         #endregion
@@ -28,46 +28,49 @@ namespace Mogoson.CameraExtension
         #region Protected Method
         protected virtual void OnEnable()
         {
-            if (script.target == null)
+            if (Target.target == null)
                 return;
 
-            angles = script.transform.eulerAngles;
-            distance = Vector3.Distance(script.transform.position, script.target.position);
+            angles = Target.transform.eulerAngles;
+            distance = Vector3.Distance(Target.transform.position, Target.target.position);
         }
 
         protected virtual void OnSceneGUI()
         {
-            if (script.target == null)
+            if (Target.target == null)
                 return;
 
             if (!Application.isPlaying)
             {
-                script.transform.rotation = Quaternion.Euler(angles);
-                script.transform.position = script.target.position - script.transform.forward * distance;
+                Target.transform.rotation = Quaternion.Euler(angles);
+                Target.transform.position = Target.target.position - Target.transform.forward * distance;
             }
 
-            GUI.color = Handles.color = blue;
-            DrawSphereCap(script.target.position, Quaternion.identity, nodeSize);
-            Handles.Label(script.target.position, "Target");
+            Handles.color = Blue;
+            var nodeSize = HandleUtility.GetHandleSize(Target.target.position) * NodeSize;
+            DrawSphereCap(Target.target.position, Quaternion.identity, nodeSize);
+            DrawSphereArrow(Target.target.position, Target.transform.position, nodeSize, Blue, string.Empty);
 
-            var direction = (script.transform.position - script.target.position).normalized;
-            DrawArrow(script.target.position, script.transform.position, nodeSize, string.Empty, blue);
-            DrawArrow(script.target.position, direction, script.distanceRange.min, nodeSize, "Min", blue);
-            DrawArrow(script.target.position, direction, script.distanceRange.max, nodeSize, "Max", blue);
+            var direction = (Target.transform.position - Target.target.position).normalized;
+            DrawSphereArrow(Target.target.position, direction, Target.distanceRange.min, nodeSize, Blue, "Min");
+            DrawSphereArrow(Target.target.position, direction, Target.distanceRange.max, nodeSize, Blue, "Max");
+
+            GUI.color = Blue;
+            Handles.Label(Target.target.position, "Target");
 
             DrawSceneTool();
         }
 
         protected virtual void DrawSceneTool()
         {
-            GUI.color = Color.white;
             var rect = new Rect(10, Screen.height - 125, 225, 75);
+            GUI.color = Color.white;
             Handles.BeginGUI();
             GUILayout.BeginArea(rect, "Current Around", "Window");
             if (Application.isPlaying)
             {
-                EditorGUILayout.Vector2Field("Angles", script.CurrentAngles);
-                EditorGUILayout.FloatField("Distance", script.CurrentDistance);
+                EditorGUILayout.Vector2Field("Angles", Target.CurrentAngles);
+                EditorGUILayout.FloatField("Distance", Target.CurrentDistance);
             }
             else
             {

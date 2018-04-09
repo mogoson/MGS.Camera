@@ -6,7 +6,7 @@
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  5/28/2017
+ *  Date         :  4/9/2018
  *  Description  :  Initial development version.
  *************************************************************************/
 
@@ -14,8 +14,8 @@ using UnityEngine;
 
 namespace Mogoson.CameraExtension
 {
-    [RequireComponent(typeof(AroundAlignCamera))]
     [AddComponentMenu("Mogoson/CameraExtension/MouseFocus")]
+    [RequireComponent(typeof(AroundAlignCamera))]
     public class MouseFocus : MonoBehaviour
     {
         #region Field and Property
@@ -32,7 +32,7 @@ namespace Mogoson.CameraExtension
         /// <summary>
         /// Current focus state.
         /// </summary>
-        public bool isFocus { protected set; get; }
+        public bool IsFocus { protected set; get; }
 
         /// <summary>
         /// Camera to ray.
@@ -62,26 +62,26 @@ namespace Mogoson.CameraExtension
             if (CheckFocusEnter())
             {
                 var ray = targetCamera.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hitInfo;
+                var hitInfo = new RaycastHit();
                 if (Physics.Raycast(ray, out hitInfo, maxDistance, layerMask))
                 {
                     var alignMark = hitInfo.transform.GetComponent<AlignMark>();
                     if (alignMark)
                     {
-                        if (isFocus == false)
+                        if (IsFocus == false)
                         {
-                            isFocus = true;
                             defaultAlign = new AlignTarget(alignCamera.target, alignCamera.CurrentAngles,
                                 alignCamera.CurrentDistance, alignCamera.angleRange, alignCamera.distanceRange);
+                            IsFocus = true;
                         }
                         alignCamera.AlignVeiwToTarget(alignMark.alignTarget);
                     }
                 }
             }
-            else if (isFocus && CheckFocusExit())
+            else if (IsFocus && CheckFocusExit())
             {
-                isFocus = false;
                 alignCamera.AlignVeiwToTarget(defaultAlign);
+                IsFocus = false;
             }
         }
 

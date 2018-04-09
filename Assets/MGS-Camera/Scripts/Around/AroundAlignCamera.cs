@@ -6,7 +6,7 @@
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
- *  Date         :  4/27/2017
+ *  Date         :  4/9/2018
  *  Description  :  Initial development version.
  *************************************************************************/
 
@@ -64,7 +64,7 @@ namespace Mogoson.CameraExtension
         }
 
         /// <summary>
-        /// Auto align camera's veiw to target.
+        /// Auto align camera veiw to target.
         /// </summary>
         protected void AutoAlignView()
         {
@@ -122,7 +122,7 @@ namespace Mogoson.CameraExtension
 
         #region Public Method
         /// <summary>
-        /// Align camera's veiw to target.
+        /// Align camera veiw to target.
         /// </summary>
         /// <param name="center">Around center.</param>
         /// <param name="angles">Rotate angles.</param>
@@ -140,19 +140,14 @@ namespace Mogoson.CameraExtension
                 targetAngles.y += 360;
 
             //Calculate lerp parameter.
-            CurrentDistance = Vector3.Distance(transform.position, target.position);
             currentDirection = (transform.position - target.position).normalized;
             targetDirection = (Quaternion.Euler(targetAngles) * Vector3.back).normalized;
+            CurrentDistance = Vector3.Distance(transform.position, target.position);
 
             //Calculate offset.
-            anglesOffset = (targetAngles - CurrentAngles).magnitude;
-            directionOffset = (targetDirection - currentDirection).magnitude;
-            distanceOffset = Mathf.Abs(targetDistance - CurrentDistance);
-
-            //Check zero value of offset.
-            anglesOffset = anglesOffset > Vector3.kEpsilon ? anglesOffset : 1;
-            directionOffset = directionOffset > Vector3.kEpsilon ? directionOffset : 1;
-            distanceOffset = distanceOffset > Vector3.kEpsilon ? distanceOffset : 1;
+            anglesOffset = Mathf.Max((targetAngles - CurrentAngles).magnitude, Vector3.kEpsilon);
+            directionOffset = Mathf.Max((targetDirection - currentDirection).magnitude, Vector3.kEpsilon);
+            distanceOffset = Mathf.Max(Mathf.Abs(targetDistance - CurrentDistance), Vector3.kEpsilon);
 
             //Start align.
             linearAdsorbent = false;
@@ -162,7 +157,7 @@ namespace Mogoson.CameraExtension
         }
 
         /// <summary>
-        /// Align camera's veiw to target.
+        /// Align camera veiw to target.
         /// </summary>
         /// <param name="alignTarget">Target of camera align.</param>
         public void AlignVeiwToTarget(AlignTarget alignTarget)
