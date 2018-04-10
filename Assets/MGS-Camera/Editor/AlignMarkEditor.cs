@@ -33,10 +33,10 @@ namespace Mogoson.CameraExtension
                 previewCamera = preview.GetComponent<Camera>();
             else
             {
-                previewCamera = new GameObject(PreviewCameraName).AddComponent<Camera>();
-                previewCamera.targetTexture = new RenderTexture(240, 180, 16);
+                previewCamera = new GameObject(PreviewCameraName) { hideFlags = HideFlags.HideAndDontSave }.AddComponent<Camera>();
+                previewCamera.targetTexture = new RenderTexture(240, 180, 16) { hideFlags = HideFlags.DontSave };
             }
-            previewCamera.transform.parent = Target.transform;
+            previewCamera.Render();
         }
 
         protected virtual void OnDisable()
