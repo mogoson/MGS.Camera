@@ -14,6 +14,9 @@ using UnityEngine;
 
 namespace Mogoson.CameraExtension
 {
+    /// <summary>
+    /// Camera rotate around target gameobject.
+    /// </summary>
     [AddComponentMenu("Mogoson/CameraExtension/AroundCamera")]
     [RequireComponent(typeof(Camera))]
     public class AroundCamera : MonoBehaviour

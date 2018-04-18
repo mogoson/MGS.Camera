@@ -2,7 +2,7 @@
  *  Copyright © 2017-2018 Mogoson. All rights reserved.
  *------------------------------------------------------------------------
  *  File         :  MouseFocus.cs
- *  Description  :  Mouse button click to align camera to target.
+ *  Description  :  Mouse click to align camera to target.
  *------------------------------------------------------------------------
  *  Author       :  Mogoson
  *  Version      :  0.1.0
@@ -14,6 +14,9 @@ using UnityEngine;
 
 namespace Mogoson.CameraExtension
 {
+    /// <summary>
+    /// Mouse click to focus camera to target.
+    /// </summary>
     [AddComponentMenu("Mogoson/CameraExtension/MouseFocus")]
     [RequireComponent(typeof(AroundAlignCamera))]
     public class MouseFocus : MonoBehaviour

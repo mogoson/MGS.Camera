@@ -14,6 +14,9 @@ using UnityEngine;
 
 namespace Mogoson.CameraExtension
 {
+    /// <summary>
+    /// Mark a gameobject for camera align to it.
+    /// </summary>
     [AddComponentMenu("Mogoson/CameraExtension/AlignMark")]
     public class AlignMark : MonoBehaviour
     {
