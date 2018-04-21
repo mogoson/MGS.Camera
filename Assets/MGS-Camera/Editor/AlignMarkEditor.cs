@@ -58,11 +58,17 @@ namespace Mogoson.CameraExtension
             previewCamera.transform.position = Target.alignTarget.center.position + previewCamera.transform.rotation * Vector3.back * Target.alignTarget.distance;
 
             Handles.color = Blue;
-            var nodeSize = HandleUtility.GetHandleSize(Target.alignTarget.center.position) * NodeSize;
-            DrawSphereCap(Target.alignTarget.center.position, Quaternion.identity, nodeSize);
-            DrawSphereArrow(Target.alignTarget.center.position, previewCamera.transform.position, nodeSize, Blue, "Camera");
-            DrawSphereArrow(Target.alignTarget.center.position, -previewCamera.transform.forward, Target.alignTarget.distanceRange.min, nodeSize, Blue, "Min");
-            DrawSphereArrow(Target.alignTarget.center.position, -previewCamera.transform.forward, Target.alignTarget.distanceRange.max, nodeSize, Blue, "Max");
+            var centerSize = HandleUtility.GetHandleSize(Target.alignTarget.center.position) * NodeSize;
+            DrawSphereCap(Target.alignTarget.center.position, Quaternion.identity, centerSize);
+
+            var cameraSize = HandleUtility.GetHandleSize(previewCamera.transform.position) * NodeSize;
+            DrawSphereArrow(Target.alignTarget.center.position, previewCamera.transform.position, cameraSize, Blue, "Camera");
+
+            var minPos = Target.alignTarget.center.position - previewCamera.transform.forward * Target.alignTarget.distanceRange.min;
+            DrawSphereArrow(Target.alignTarget.center.position, minPos, HandleUtility.GetHandleSize(minPos) * NodeSize, Blue, "Min");
+
+            var maxPos = Target.alignTarget.center.position - previewCamera.transform.forward * Target.alignTarget.distanceRange.max;
+            DrawSphereArrow(Target.alignTarget.center.position, maxPos, HandleUtility.GetHandleSize(maxPos) * NodeSize, Blue, "Max");
 
             GUI.color = Blue;
             Handles.Label(Target.alignTarget.center.position, "Center");

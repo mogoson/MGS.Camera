@@ -53,13 +53,15 @@ namespace Mogoson.CameraExtension
              };
 
             Handles.color = Blue;
-            var nodeSize = HandleUtility.GetHandleSize(Target.areaSettings.center.position) * NodeSize;
-            DrawSphereCap(Target.areaSettings.center.position, Quaternion.identity, nodeSize);
-            DrawSphereCap(Target.transform.position, Quaternion.identity, nodeSize);
+            var centerSize = HandleUtility.GetHandleSize(Target.areaSettings.center.position) * NodeSize;
+            DrawSphereCap(Target.areaSettings.center.position, Quaternion.identity, centerSize);
+
+            DrawSphereCap(Target.transform.position, Quaternion.identity, HandleUtility.GetHandleSize(Target.transform.position) * NodeSize);
             Handles.DrawSolidRectangleWithOutline(verts, TransparentBlue, Blue);
 
             var project = new Vector3(Target.transform.position.x, Target.areaSettings.center.position.y, Target.transform.position.z);
-            DrawSphereArrow(Target.transform.position, project, nodeSize, Blue, string.Empty);
+            DrawSphereArrow(Target.transform.position, project, HandleUtility.GetHandleSize(project) * NodeSize, Blue, string.Empty);
+
             Handles.DrawLine(new Vector3(verts[0].x, verts[0].y, Target.transform.position.z), new Vector3(verts[1].x, verts[1].y, Target.transform.position.z));
             Handles.DrawLine(new Vector3(Target.transform.position.x, verts[0].y, verts[0].z), new Vector3(Target.transform.position.x, verts[3].y, verts[3].z));
 
@@ -69,7 +71,7 @@ namespace Mogoson.CameraExtension
             if (Target.targetCamera == null)
                 return;
 
-            DrawSphereArrow(Target.transform.position, Target.targetCamera.position, nodeSize, Blue, string.Empty);
+            DrawSphereArrow(Target.transform.position, Target.targetCamera.position, HandleUtility.GetHandleSize(Target.targetCamera.position) * NodeSize, Blue, string.Empty);
             DrawSceneTool();
         }
 

@@ -47,13 +47,14 @@ namespace Mogoson.CameraExtension
             }
 
             Handles.color = Blue;
-            var nodeSize = HandleUtility.GetHandleSize(Target.target.position) * NodeSize;
-            DrawSphereCap(Target.target.position, Quaternion.identity, nodeSize);
-            DrawSphereArrow(Target.target.position, Target.transform.position, nodeSize, Blue, string.Empty);
+            DrawSphereCap(Target.target.position, Quaternion.identity, HandleUtility.GetHandleSize(Target.target.position) * NodeSize);
+            DrawSphereArrow(Target.target.position, Target.transform.position, HandleUtility.GetHandleSize(Target.transform.position) * NodeSize, Blue, string.Empty);
 
             var direction = (Target.transform.position - Target.target.position).normalized;
-            DrawSphereArrow(Target.target.position, direction, Target.distanceRange.min, nodeSize, Blue, "Min");
-            DrawSphereArrow(Target.target.position, direction, Target.distanceRange.max, nodeSize, Blue, "Max");
+            var minPos = Target.target.position + direction * Target.distanceRange.min;
+            var maxPos = Target.target.position + direction * Target.distanceRange.max;
+            DrawSphereArrow(Target.target.position, direction, Target.distanceRange.min, HandleUtility.GetHandleSize(minPos) * NodeSize, Blue, "Min");
+            DrawSphereArrow(Target.target.position, direction, Target.distanceRange.max, HandleUtility.GetHandleSize(maxPos) * NodeSize, Blue, "Max");
 
             GUI.color = Blue;
             Handles.Label(Target.target.position, "Target");
