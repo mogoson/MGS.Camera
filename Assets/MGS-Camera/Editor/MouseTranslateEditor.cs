@@ -8,8 +8,14 @@
  *  Version      :  0.1.0
  *  Date         :  4/9/2018
  *  Description  :  Initial development version.
+ *  
+ *  Author       :  Mogoson
+ *  Version      :  0.1.1
+ *  Date         :  6/27/2018
+ *  Description  :  Optimize display of node.
  *************************************************************************/
 
+using Mogoson.UEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,7 +23,7 @@ namespace Mogoson.CameraExtension
 {
     [CustomEditor(typeof(MouseTranslate), true)]
     [CanEditMultipleObjects]
-    public class MouseTranslateEditor : BaseEditor
+    public class MouseTranslateEditor : GenericEditor
     {
         #region Field and Property
         protected MouseTranslate Target { get { return target as MouseTranslate; } }
@@ -53,25 +59,21 @@ namespace Mogoson.CameraExtension
              };
 
             Handles.color = Blue;
-            var centerSize = HandleUtility.GetHandleSize(Target.areaSettings.center.position) * NodeSize;
-            DrawSphereCap(Target.areaSettings.center.position, Quaternion.identity, centerSize);
-
-            DrawSphereCap(Target.transform.position, Quaternion.identity, HandleUtility.GetHandleSize(Target.transform.position) * NodeSize);
             Handles.DrawSolidRectangleWithOutline(verts, TransparentBlue, Blue);
-
-            var project = new Vector3(Target.transform.position.x, Target.areaSettings.center.position.y, Target.transform.position.z);
-            DrawSphereArrow(Target.transform.position, project, HandleUtility.GetHandleSize(project) * NodeSize, Blue, string.Empty);
-
             Handles.DrawLine(new Vector3(verts[0].x, verts[0].y, Target.transform.position.z), new Vector3(verts[1].x, verts[1].y, Target.transform.position.z));
             Handles.DrawLine(new Vector3(Target.transform.position.x, verts[0].y, verts[0].z), new Vector3(Target.transform.position.x, verts[3].y, verts[3].z));
-
-            GUI.color = Blue;
             Handles.Label(Target.areaSettings.center.position, "Center");
+
+            DrawAdaptiveSphereCap(Target.areaSettings.center.position, Quaternion.identity, NodeSize);
+            DrawAdaptiveSphereCap(Target.transform.position, Quaternion.identity, NodeSize);
+
+            var project = new Vector3(Target.transform.position.x, Target.areaSettings.center.position.y, Target.transform.position.z);
+            DrawSphereArrow(Target.transform.position, project, NodeSize);
 
             if (Target.targetCamera == null)
                 return;
 
-            DrawSphereArrow(Target.transform.position, Target.targetCamera.position, HandleUtility.GetHandleSize(Target.targetCamera.position) * NodeSize, Blue, string.Empty);
+            DrawSphereArrow(Target.transform.position, Target.targetCamera.position, NodeSize);
             DrawSceneTool();
         }
 

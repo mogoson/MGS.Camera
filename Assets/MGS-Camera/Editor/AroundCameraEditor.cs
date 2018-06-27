@@ -8,8 +8,14 @@
  *  Version      :  0.1.0
  *  Date         :  4/9/2018
  *  Description  :  Initial development version.
+ *  
+ *  Author       :  Mogoson
+ *  Version      :  0.1.1
+ *  Date         :  6/27/2018
+ *  Description  :  Optimize display of node.
  *************************************************************************/
 
+using Mogoson.UEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,7 +23,7 @@ namespace Mogoson.CameraExtension
 {
     [CustomEditor(typeof(AroundCamera), true)]
     [CanEditMultipleObjects]
-    public class AroundCameraEditor : BaseEditor
+    public class AroundCameraEditor : GenericEditor
     {
         #region Field and Property
         protected AroundCamera Target { get { return target as AroundCamera; } }
@@ -47,16 +53,12 @@ namespace Mogoson.CameraExtension
             }
 
             Handles.color = Blue;
-            DrawSphereCap(Target.target.position, Quaternion.identity, HandleUtility.GetHandleSize(Target.target.position) * NodeSize);
-            DrawSphereArrow(Target.target.position, Target.transform.position, HandleUtility.GetHandleSize(Target.transform.position) * NodeSize, Blue, string.Empty);
+            DrawAdaptiveSphereCap(Target.target.position, Quaternion.identity, NodeSize);
 
-            var direction = (Target.transform.position - Target.target.position).normalized;
-            var minPos = Target.target.position + direction * Target.distanceRange.min;
-            var maxPos = Target.target.position + direction * Target.distanceRange.max;
-            DrawSphereArrow(Target.target.position, direction, Target.distanceRange.min, HandleUtility.GetHandleSize(minPos) * NodeSize, Blue, "Min");
-            DrawSphereArrow(Target.target.position, direction, Target.distanceRange.max, HandleUtility.GetHandleSize(maxPos) * NodeSize, Blue, "Max");
-
-            GUI.color = Blue;
+            var direction = Target.transform.position - Target.target.position;
+            DrawSphereArrow(Target.target.position, Target.transform.position, NodeSize);
+            DrawSphereArrow(Target.target.position, direction, Target.distanceRange.min, NodeSize, "Min");
+            DrawSphereArrow(Target.target.position, direction, Target.distanceRange.max, NodeSize, "Max");
             Handles.Label(Target.target.position, "Target");
 
             DrawSceneTool();

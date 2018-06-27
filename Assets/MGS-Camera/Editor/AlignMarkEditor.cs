@@ -8,8 +8,14 @@
  *  Version      :  0.1.0
  *  Date         :  4/9/2018
  *  Description  :  Initial development version.
+ *  
+ *  Author       :  Mogoson
+ *  Version      :  0.1.1
+ *  Date         :  6/27/2018
+ *  Description  :  Optimize display of node.
  *************************************************************************/
 
+using Mogoson.UEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,7 +23,7 @@ namespace Mogoson.CameraExtension
 {
     [CustomEditor(typeof(AlignMark), true)]
     [CanEditMultipleObjects]
-    public class AlignMarkEditor : BaseEditor
+    public class AlignMarkEditor : GenericEditor
     {
         #region Field and Property
         protected AlignMark Target { get { return target as AlignMark; } }
@@ -58,19 +64,13 @@ namespace Mogoson.CameraExtension
             previewCamera.transform.position = Target.alignTarget.center.position + previewCamera.transform.rotation * Vector3.back * Target.alignTarget.distance;
 
             Handles.color = Blue;
-            var centerSize = HandleUtility.GetHandleSize(Target.alignTarget.center.position) * NodeSize;
-            DrawSphereCap(Target.alignTarget.center.position, Quaternion.identity, centerSize);
-
-            var cameraSize = HandleUtility.GetHandleSize(previewCamera.transform.position) * NodeSize;
-            DrawSphereArrow(Target.alignTarget.center.position, previewCamera.transform.position, cameraSize, Blue, "Camera");
+            DrawAdaptiveSphereCap(Target.alignTarget.center.position, Quaternion.identity, NodeSize);
+            DrawSphereArrow(Target.alignTarget.center.position, previewCamera.transform.position, NodeSize, "Camera");
 
             var minPos = Target.alignTarget.center.position - previewCamera.transform.forward * Target.alignTarget.distanceRange.min;
-            DrawSphereArrow(Target.alignTarget.center.position, minPos, HandleUtility.GetHandleSize(minPos) * NodeSize, Blue, "Min");
-
             var maxPos = Target.alignTarget.center.position - previewCamera.transform.forward * Target.alignTarget.distanceRange.max;
-            DrawSphereArrow(Target.alignTarget.center.position, maxPos, HandleUtility.GetHandleSize(maxPos) * NodeSize, Blue, "Max");
-
-            GUI.color = Blue;
+            DrawSphereArrow(Target.alignTarget.center.position, minPos, NodeSize, "Min");
+            DrawSphereArrow(Target.alignTarget.center.position, maxPos, NodeSize, "Max");
             Handles.Label(Target.alignTarget.center.position, "Center");
 
             DrawSceneTool();
