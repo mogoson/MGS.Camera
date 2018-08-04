@@ -13,7 +13,7 @@
 using System;
 using UnityEngine;
 
-namespace Mogoson.CameraExtension
+namespace Mogoson.UCamera
 {
     /// <summary>
     /// Settings of mouse input.

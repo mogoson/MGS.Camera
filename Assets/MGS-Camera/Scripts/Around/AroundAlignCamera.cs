@@ -13,12 +13,12 @@
 using System;
 using UnityEngine;
 
-namespace Mogoson.CameraExtension
+namespace Mogoson.UCamera
 {
     /// <summary>
     /// Camera rotate around and align to target gameobject.
     /// </summary>
-    [AddComponentMenu("Mogoson/CameraExtension/AroundAlignCamera")]
+    [AddComponentMenu("Mogoson/UCamera/AroundAlignCamera")]
     public class AroundAlignCamera : AroundCamera
     {
         #region Field and Property

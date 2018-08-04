@@ -17,12 +17,12 @@
 
 using UnityEngine;
 
-namespace Mogoson.CameraExtension
+namespace Mogoson.UCamera
 {
     /// <summary>
     /// Mark gameobject for camera align to it.
     /// </summary>
-    [AddComponentMenu("Mogoson/CameraExtension/AlignMark")]
+    [AddComponentMenu("Mogoson/UCamera/AlignMark")]
     public class AlignMark : MonoBehaviour
     {
         #region Field and Property

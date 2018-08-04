@@ -12,12 +12,12 @@
 
 using UnityEngine;
 
-namespace Mogoson.CameraExtension
+namespace Mogoson.UCamera
 {
     /// <summary>
     /// Mouse pointer drag to translate gameobject.
     /// </summary>
-    [AddComponentMenu("Mogoson/CameraExtension/MouseTranslate")]
+    [AddComponentMenu("Mogoson/UCamera/MouseTranslate")]
     public class MouseTranslate : MonoBehaviour
     {
         #region Field and Property

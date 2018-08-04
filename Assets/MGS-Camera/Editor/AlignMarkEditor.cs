@@ -19,7 +19,7 @@ using Mogoson.UEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace Mogoson.CameraExtension
+namespace Mogoson.UCamera
 {
     [CustomEditor(typeof(AlignMark), true)]
     [CanEditMultipleObjects]

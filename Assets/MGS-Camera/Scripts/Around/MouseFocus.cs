@@ -12,12 +12,12 @@
 
 using UnityEngine;
 
-namespace Mogoson.CameraExtension
+namespace Mogoson.UCamera
 {
     /// <summary>
     /// Mouse click to focus camera to target.
     /// </summary>
-    [AddComponentMenu("Mogoson/CameraExtension/MouseFocus")]
+    [AddComponentMenu("Mogoson/UCamera/MouseFocus")]
     [RequireComponent(typeof(AroundAlignCamera))]
     public class MouseFocus : MonoBehaviour
     {

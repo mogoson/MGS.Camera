@@ -12,8 +12,9 @@
 
 using UnityEngine;
 
-namespace Mogoson.CameraExtension
+namespace Mogoson.UCamera
 {
+    [AddComponentMenu("Mogoson/UCamera/TestAlignUI")]
     public class TestAlignUI : MonoBehaviour
     {
         #region Field and Property
