@@ -33,13 +33,13 @@
 
 ![Around](./Attachments/README_Image/Around.gif)
 
-- AlignPreview
+- Align Preview
 
-![AlignPreview](./Attachments/README_Image/AlignPreview.gif)﻿
+![Align Preview](./Attachments/README_Image/AlignPreview.gif)﻿
 
 - Focus
 
 ![Focus](./Attachments/README_Image/Focus.gif)
 
 ## 联系
-- 如果你有任何问题或者建议，欢迎通过mogoson@qq.com联系我。
+- 如果你有任何问题或者建议，欢迎通过mogoson@outlook.com联系我。
