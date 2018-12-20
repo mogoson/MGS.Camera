@@ -36,7 +36,9 @@ namespace Mogoson.UCamera
         {
             var preview = GameObject.Find(PreviewCameraName);
             if (preview)
+            {
                 previewCamera = preview.GetComponent<Camera>();
+            }
             else
             {
                 previewCamera = new GameObject(PreviewCameraName) { hideFlags = HideFlags.HideAndDontSave }.AddComponent<Camera>();
@@ -57,7 +59,9 @@ namespace Mogoson.UCamera
         protected virtual void OnSceneGUI()
         {
             if (Target.alignTarget.center == null)
+            {
                 return;
+            }
 
             DrawPositionHandle(Target.alignTarget.center);
             previewCamera.transform.rotation = Quaternion.Euler(Target.alignTarget.angles);

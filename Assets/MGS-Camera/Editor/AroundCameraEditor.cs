@@ -35,7 +35,9 @@ namespace Mogoson.UCamera
         protected virtual void OnEnable()
         {
             if (Target.target == null)
+            {
                 return;
+            }
 
             angles = Target.transform.eulerAngles;
             distance = Vector3.Distance(Target.transform.position, Target.target.position);
@@ -44,7 +46,9 @@ namespace Mogoson.UCamera
         protected virtual void OnSceneGUI()
         {
             if (Target.target == null)
+            {
                 return;
+            }
 
             if (!Application.isPlaying)
             {
@@ -81,7 +85,9 @@ namespace Mogoson.UCamera
                 angles = EditorGUILayout.Vector2Field("Angles", angles);
                 distance = EditorGUILayout.FloatField("Distance", distance);
                 if (EditorGUI.EndChangeCheck())
+                {
                     MarkSceneDirty();
+                }
             }
             GUILayout.EndArea();
             Handles.EndGUI();

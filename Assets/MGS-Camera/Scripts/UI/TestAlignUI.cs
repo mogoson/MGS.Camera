@@ -36,13 +36,21 @@ namespace Mogoson.UCamera
             GUILayout.Space(xOffset);
             GUILayout.BeginVertical();
             if (GUILayout.Button("Back To Default"))
+            {
                 AlignCameraToDefault();
+            }
             if (GUILayout.Button("Align To Mark 0"))
+            {
                 AlignCameraToMark(alignMarks[0]);
+            }
             if (GUILayout.Button("Align To Mark 1"))
+            {
                 AlignCameraToMark(alignMarks[1]);
+            }
             if (GUILayout.Button("Align To Mark 2"))
+            {
                 AlignCameraToMark(alignMarks[2]);
+            }
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
         }

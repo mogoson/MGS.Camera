@@ -34,17 +34,23 @@ namespace Mogoson.UCamera
         protected virtual void OnEnable()
         {
             if (Target.areaSettings.center == null)
+            {
                 return;
+            }
             offset = Target.transform.position - Target.areaSettings.center.position;
         }
 
         protected virtual void OnSceneGUI()
         {
             if (Target.areaSettings.center == null)
+            {
                 return;
+            }
 
             if (!Application.isPlaying)
+            {
                 Target.transform.position = Target.areaSettings.center.position + offset;
+            }
 
             DrawPositionHandle(Target.areaSettings.center);
 
@@ -71,7 +77,9 @@ namespace Mogoson.UCamera
             DrawSphereArrow(Target.transform.position, project, NodeSize);
 
             if (Target.targetCamera == null)
+            {
                 return;
+            }
 
             DrawSphereArrow(Target.transform.position, Target.targetCamera.position, NodeSize);
             DrawSceneTool();
@@ -84,13 +92,17 @@ namespace Mogoson.UCamera
             Handles.BeginGUI();
             GUILayout.BeginArea(rect, "Current Offset", "Window");
             if (Application.isPlaying)
+            {
                 EditorGUILayout.Vector3Field(string.Empty, Target.CurrentOffset);
+            }
             else
             {
                 EditorGUI.BeginChangeCheck();
                 offset = EditorGUILayout.Vector3Field(string.Empty, offset);
                 if (EditorGUI.EndChangeCheck())
+                {
                     MarkSceneDirty();
+                }
             }
             GUILayout.EndArea();
             Handles.EndGUI();

@@ -61,9 +61,13 @@ namespace Mogoson.UCamera
         protected override void LateUpdate()
         {
             if (IsAligning)
+            {
                 AutoAlignView();
+            }
             else
+            {
                 AroundByMouseInput();
+            }
         }
 
         /// <summary>
@@ -82,7 +86,9 @@ namespace Mogoson.UCamera
             {
                 IsAligning = false;
                 if (OnAlignEnd != null)
+                {
                     OnAlignEnd.Invoke();
+                }
             }
             else
             {
@@ -138,9 +144,13 @@ namespace Mogoson.UCamera
 
             //Optimal angles.
             while (targetAngles.y - CurrentAngles.y > 180)
+            {
                 targetAngles.y -= 360;
+            }
             while (targetAngles.y - CurrentAngles.y < -180)
+            {
                 targetAngles.y += 360;
+            }
 
             //Calculate lerp parameter.
             currentDirection = (transform.position - target.position).normalized;
@@ -156,7 +166,9 @@ namespace Mogoson.UCamera
             linearAdsorbent = false;
             IsAligning = true;
             if (OnAlignStart != null)
+            {
                 OnAlignStart.Invoke();
+            }
         }
 
         /// <summary>
