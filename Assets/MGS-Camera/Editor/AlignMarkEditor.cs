@@ -63,6 +63,12 @@ namespace Mogoson.UCamera
                 return;
             }
 
+            DrawSceneGizmos();
+            DrawSceneGUI();
+        }
+
+        protected void DrawSceneGizmos()
+        {
             DrawPositionHandle(Target.alignTarget.center);
             previewCamera.transform.rotation = Quaternion.Euler(Target.alignTarget.angles);
             previewCamera.transform.position = Target.alignTarget.center.position + previewCamera.transform.rotation * Vector3.back * Target.alignTarget.distance;
@@ -76,11 +82,9 @@ namespace Mogoson.UCamera
             DrawSphereArrow(Target.alignTarget.center.position, minPos, NodeSize, "Min");
             DrawSphereArrow(Target.alignTarget.center.position, maxPos, NodeSize, "Max");
             Handles.Label(Target.alignTarget.center.position, "Center");
-
-            DrawSceneTool();
         }
 
-        protected virtual void DrawSceneTool()
+        protected void DrawSceneGUI()
         {
             var rect = new Rect(Screen.width - 260, Screen.height - 255, 250, 205);
             GUI.color = Color.white;

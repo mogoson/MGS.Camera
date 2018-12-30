@@ -56,8 +56,7 @@ namespace Mogoson.UCamera
         #region Protected Method
         protected virtual void Start()
         {
-            targetCamera = GetComponent<Camera>();
-            alignCamera = GetComponent<AroundAlignCamera>();
+            Initialize();
         }
 
         protected virtual void OnGUI()
@@ -86,6 +85,15 @@ namespace Mogoson.UCamera
                 alignCamera.AlignVeiwToTarget(defaultAlign);
                 IsFocus = false;
             }
+        }
+
+        /// <summary>
+        /// Initialize component.
+        /// </summary>
+        protected virtual void Initialize()
+        {
+            targetCamera = GetComponent<Camera>();
+            alignCamera = GetComponent<AroundAlignCamera>();
         }
 
         /// <summary>

@@ -66,7 +66,7 @@ namespace Mogoson.UCamera
             }
             else
             {
-                AroundByMouseInput();
+                AroundByMouse();
             }
         }
 

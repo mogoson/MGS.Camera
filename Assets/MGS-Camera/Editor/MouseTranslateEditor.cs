@@ -51,7 +51,19 @@ namespace Mogoson.UCamera
             {
                 Target.transform.position = Target.areaSettings.center.position + offset;
             }
+            DrawSceneGizmos();
 
+            if (Target.targetCamera == null)
+            {
+                return;
+            }
+
+            DrawSphereArrow(Target.transform.position, Target.targetCamera.position, NodeSize);
+            DrawSceneGUI();
+        }
+
+        protected void DrawSceneGizmos()
+        {
             DrawPositionHandle(Target.areaSettings.center);
 
             var widthOffset = Vector3.right * Target.areaSettings.width;
@@ -75,17 +87,9 @@ namespace Mogoson.UCamera
 
             var project = new Vector3(Target.transform.position.x, Target.areaSettings.center.position.y, Target.transform.position.z);
             DrawSphereArrow(Target.transform.position, project, NodeSize);
-
-            if (Target.targetCamera == null)
-            {
-                return;
-            }
-
-            DrawSphereArrow(Target.transform.position, Target.targetCamera.position, NodeSize);
-            DrawSceneTool();
         }
 
-        protected virtual void DrawSceneTool()
+        protected void DrawSceneGUI()
         {
             var rect = new Rect(10, Screen.height - 90, 225, 40);
             GUI.color = Color.white;

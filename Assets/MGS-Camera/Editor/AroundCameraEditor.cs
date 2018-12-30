@@ -56,6 +56,12 @@ namespace Mogoson.UCamera
                 Target.transform.position = Target.target.position - Target.transform.forward * distance;
             }
 
+            DrawSceneGizmos();
+            DrawSceneGUI();
+        }
+
+        protected void DrawSceneGizmos()
+        {
             Handles.color = Blue;
             DrawAdaptiveSphereCap(Target.target.position, Quaternion.identity, NodeSize);
 
@@ -64,11 +70,9 @@ namespace Mogoson.UCamera
             DrawSphereArrow(Target.target.position, direction, Target.distanceRange.min, NodeSize, "Min");
             DrawSphereArrow(Target.target.position, direction, Target.distanceRange.max, NodeSize, "Max");
             Handles.Label(Target.target.position, "Target");
-
-            DrawSceneTool();
         }
 
-        protected virtual void DrawSceneTool()
+        protected void DrawSceneGUI()
         {
             var rect = new Rect(10, Screen.height - 125, 225, 75);
             GUI.color = Color.white;

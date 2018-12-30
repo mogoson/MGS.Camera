@@ -72,19 +72,27 @@ namespace Mogoson.UCamera
         #region Protected Method
         protected virtual void Start()
         {
-            CurrentAngles = targetAngles = transform.eulerAngles;
-            CurrentDistance = targetDistance = Vector3.Distance(transform.position, target.position);
+            Initialize();
         }
 
         protected virtual void LateUpdate()
         {
-            AroundByMouseInput();
+            AroundByMouse();
         }
 
         /// <summary>
-        /// Camera around target by mouse input.
+        /// Initialize component.
         /// </summary>
-        protected void AroundByMouseInput()
+        protected virtual void Initialize()
+        {
+            CurrentAngles = targetAngles = transform.eulerAngles;
+            CurrentDistance = targetDistance = Vector3.Distance(transform.position, target.position);
+        }
+
+        /// <summary>
+        /// Camera around target by mouse.
+        /// </summary>
+        protected void AroundByMouse()
         {
             if (Input.GetMouseButton(mouseSettings.mouseButtonID))
             {

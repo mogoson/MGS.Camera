@@ -56,18 +56,26 @@ namespace Mogoson.UCamera
         #region Protected Method
         protected virtual void Start()
         {
-            CurrentOffset = targetOffset = transform.position - areaSettings.center.position;
+            Initialize();
         }
 
         protected virtual void Update()
         {
-            TranslateByMouseInput();
+            TranslateByMouse();
         }
 
         /// <summary>
-        /// Translate this gameobject by mouse input.
+        /// Initialize component.
         /// </summary>
-        protected void TranslateByMouseInput()
+        protected virtual void Initialize()
+        {
+            CurrentOffset = targetOffset = transform.position - areaSettings.center.position;
+        }
+
+        /// <summary>
+        /// Translate this gameobject by mouse.
+        /// </summary>
+        protected void TranslateByMouse()
         {
             if (Input.GetMouseButton(mouseSettings.mouseButtonID))
             {
