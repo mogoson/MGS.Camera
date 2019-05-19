@@ -11,7 +11,7 @@
 
 ## Environment
 - Unity 5.0 or above.
-- .Net Framework 3.0 or above.
+- .Net Framework 3.5 or above.
 
 ## Scheme
 - Calculate camera position base on mark center gameobject.
@@ -31,15 +31,15 @@
 ## Preview
 - Around
 
-![Around](./Attachments/README_Image/Around.gif)
+![Around](./Attachment/README_Image/Around.gif)
 
 - Align Preview
 
-![Align Preview](./Attachments/README_Image/AlignPreview.gif)﻿
+![Align Preview](./Attachment/README_Image/AlignPreview.gif)﻿
 
 - Focus
 
-![Focus](./Attachments/README_Image/Focus.gif)
+![Focus](./Attachment/README_Image/Focus.gif)
 
 ## Contact
 - If you have any questions, feel free to contact me at mogoson@outlook.com.

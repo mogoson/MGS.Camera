@@ -11,7 +11,7 @@
 
 ## 环境
 - Unity 5.0 或更高版本。
-- .Net Framework 3.0 或更高版本。
+- .Net Framework 3.5 或更高版本。
 
 ## 方案
 - 基于标记的中心Center计算摄像机位移。
@@ -31,15 +31,15 @@
 ## 预览
 - Around
 
-![Around](./Attachments/README_Image/Around.gif)
+![Around](./Attachment/README_Image/Around.gif)
 
 - Align Preview
 
-![Align Preview](./Attachments/README_Image/AlignPreview.gif)﻿
+![Align Preview](./Attachment/README_Image/AlignPreview.gif)﻿
 
 - Focus
 
-![Focus](./Attachments/README_Image/Focus.gif)
+![Focus](./Attachment/README_Image/Focus.gif)
 
 ## 联系
 - 如果你有任何问题或者建议，欢迎通过mogoson@outlook.com联系我。
