@@ -1,5 +1,4 @@
 ﻿# MGS-Camera
-- [中文手册](./README_ZH.md)
 
 ## Summary
 - Unity plugin for control camera in scene.

@@ -39,12 +39,12 @@
             Camera is auto aligning.
             </summary>
         </member>
-        <member name="E:MGS.UCamera.AroundAlignCamera.OnAlignStart">
+        <member name="P:MGS.UCamera.AroundAlignCamera.OnAlignStart">
             <summary>
             Start align event.
             </summary>
         </member>
-        <member name="E:MGS.UCamera.AroundAlignCamera.OnAlignEnd">
+        <member name="P:MGS.UCamera.AroundAlignCamera.OnAlignEnd">
             <summary>
             End align event.
             </summary>
@@ -183,19 +183,19 @@
             Target distance from camera to target.
             </summary>
         </member>
-        <member name="M:MGS.UCamera.AroundCamera.Start">
+        <member name="M:MGS.UCamera.AroundCamera.Awake">
             <summary>
-            Start component.
-            </summary>
-        </member>
-        <member name="M:MGS.UCamera.AroundCamera.LateUpdate">
-            <summary>
-            Late update component.
+            Awake component.
             </summary>
         </member>
         <member name="M:MGS.UCamera.AroundCamera.Initialize">
             <summary>
             Initialize component.
+            </summary>
+        </member>
+        <member name="M:MGS.UCamera.AroundCamera.LateUpdate">
+            <summary>
+            Late update component.
             </summary>
         </member>
         <member name="M:MGS.UCamera.AroundCamera.AroundByMouse">
@@ -238,9 +238,9 @@
              Camera default align.
             </summary>
         </member>
-        <member name="M:MGS.UCamera.MouseFocus.Start">
+        <member name="M:MGS.UCamera.MouseFocus.Awake">
             <summary>
-            Component start.
+            Component awake.
             </summary>
         </member>
         <member name="M:MGS.UCamera.MouseFocus.OnGUI">
@@ -295,7 +295,7 @@
             Range limit of distance.
             </summary>
         </member>
-        <member name="M:MGS.UCamera.AlignTarget.#ctor(UnityEngine.Transform,UnityEngine.Vector2,System.Single,MGS.UCamera.Range,MGS.UCamera.Range)">
+        <member name="M:MGS.UCamera.AlignTarget.#ctor(UnityEngine.Transform,UnityEngine.Vector2,System.Single,MGS.UCommon.Generic.Range,MGS.UCommon.Generic.Range)">
             <summary>
             Constructor.
             </summary>
@@ -333,56 +333,6 @@
             <param name="pointerSensitivity">Sensitivity of mouse pointer.</param>
             <param name="wheelSensitivity">Sensitivity of mouse ScrollWheel.</param>
         </member>
-        <member name="T:MGS.UCamera.PlaneArea">
-            <summary>
-            Rectangle area on plane.
-            </summary>
-        </member>
-        <member name="F:MGS.UCamera.PlaneArea.center">
-            <summary>
-            Center of area.
-            </summary>
-        </member>
-        <member name="F:MGS.UCamera.PlaneArea.width">
-            <summary>
-            Width of area.
-            </summary>
-        </member>
-        <member name="F:MGS.UCamera.PlaneArea.length">
-            <summary>
-            Length of area.
-            </summary>
-        </member>
-        <member name="M:MGS.UCamera.PlaneArea.#ctor(UnityEngine.Transform,System.Single,System.Single)">
-            <summary>
-            Constructor.
-            </summary>
-            <param name="center">Center of area.</param>
-            <param name="width">Width of area.</param>
-            <param name="length">Length of area.</param>
-        </member>
-        <member name="T:MGS.UCamera.Range">
-            <summary>
-            Range form min to max.
-            </summary>
-        </member>
-        <member name="F:MGS.UCamera.Range.min">
-            <summary>
-            Min value of range.
-            </summary>
-        </member>
-        <member name="F:MGS.UCamera.Range.max">
-            <summary>
-            Max value of range.
-            </summary>
-        </member>
-        <member name="M:MGS.UCamera.Range.#ctor(System.Single,System.Single)">
-            <summary>
-            Constructor.
-            </summary>
-            <param name="min">Min value of range.</param>
-            <param name="max">Max value of range.</param>
-        </member>
         <member name="T:MGS.UCamera.MouseTranslate">
             <summary>
             Mouse pointer drag to translate gameobject.
@@ -418,9 +368,9 @@
             Target offset base area center.
             </summary>
         </member>
-        <member name="M:MGS.UCamera.MouseTranslate.Start">
+        <member name="M:MGS.UCamera.MouseTranslate.Awake">
             <summary>
-            Component start.
+            Component awake.
             </summary>
         </member>
         <member name="M:MGS.UCamera.MouseTranslate.Update">
