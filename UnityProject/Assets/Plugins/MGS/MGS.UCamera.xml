@@ -188,11 +188,6 @@
             Awake component.
             </summary>
         </member>
-        <member name="M:MGS.UCamera.AroundCamera.Initialize">
-            <summary>
-            Initialize component.
-            </summary>
-        </member>
         <member name="M:MGS.UCamera.AroundCamera.LateUpdate">
             <summary>
             Late update component.
@@ -246,11 +241,6 @@
         <member name="M:MGS.UCamera.MouseFocus.OnGUI">
             <summary>
             On component draw GUI.
-            </summary>
-        </member>
-        <member name="M:MGS.UCamera.MouseFocus.Initialize">
-            <summary>
-            Initialize component.
             </summary>
         </member>
         <member name="M:MGS.UCamera.MouseFocus.CheckFocusEnter">
@@ -376,11 +366,6 @@
         <member name="M:MGS.UCamera.MouseTranslate.Update">
             <summary>
             Component update.
-            </summary>
-        </member>
-        <member name="M:MGS.UCamera.MouseTranslate.Initialize">
-            <summary>
-            Initialize component.
             </summary>
         </member>
         <member name="M:MGS.UCamera.MouseTranslate.TranslateByMouse">
