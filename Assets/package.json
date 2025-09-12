@@ -1,0 +1,24 @@
+{
+    "name": "com.mgs.camera",
+    "version": "1.0.0",
+    "displayName": "Camera",
+    "description": "Unity plugin for control camera in scene.",
+    "unity": "2021.3",
+    "keywords": [
+        "camera",
+        "around",
+        "align"
+    ],
+    "author": {
+        "name": "Mogoson",
+        "email": "mogoson@outlook.com",
+        "url": "https://github.com/mogoson"
+    },
+    "samples": [
+        {
+            "displayName": "Sample",
+            "description": "Sample for camera control runtime",
+            "path": "Samples~/Sample"
+        }
+    ]
+}

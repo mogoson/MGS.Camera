@@ -1,44 +1,50 @@
-﻿# MGS-Camera
+[TOC]
+
+# MGS.Camera
 
 ## Summary
+
 - Unity plugin for control camera in scene.
 
-## Demand
-- Translate camera by mouse pointer drag.
+## Ability
+
+- Move camera by mouse pointer drag.
 - Camera rotate around target gameobject.
 - Camera smooth align to mark gameobject.
 
-## Environment
-- Unity 5.0 or above.
-- .Net Framework 3.5 or above.
+## Install
 
-## Scheme
-- Calculate camera position base on mark center gameobject.
-- Calculate camera position and rotation base on mark target gameobject.
-- Smooth lerp position and rotation of camera.
+- Unity --> Window --> Package Manager --> "+" --> Add package from git URL...
 
-## Achieve
-- MouseTranslate : Translate gameobject by mouse pointer drag.
-- AroundCamera : Camera rotate around target gameobject.
-- AroundAlignCamera : Camera rotate around target gameobject and align to mark gameobject.
-- MouseFocus : Align camera to gameobject on mouse pointer double click it.
-- AlignMark : Mark gameobject as align target and config align parameters.
+  ```text
+  https://github.com/mogoson/MGS.Camera.git?path=/Assets
+  ```
 
-## Demo
-- Demos in the path "MGS-Camera/Scenes" provide reference to you.
+## Usage
 
-## Preview
-- Around
+- Reference the **Samples** to use the components in your project.
 
-![Around](./Attachment/README_Image/Around.gif)
+- If a camera attached the AroundCamera or AlignCamera component
+    and is configured and selected, the "Current Around" panel will
+    display in the lower left quarter of the scene window.
+    Use it to set the default position and rotation of camera base on the
+    around target in editor mode.
 
-- Align Preview
+- If a gameobject attached the AreaMover component and is
+    configured and selected, the "Current Offset" panel will display in
+    the lower left quarter of the scene window.
+    Use it to set the default position of gameobject base on the area
+    center in editor mode.
 
-![Align Preview](./Attachment/README_Image/AlignPreview.gif)﻿
+- If a gameobject attached the AlignMark component and is selected, the
+    "Camera Align Preview" panel will display in the lower right quarter
+    of the scene window.
+    Reference it to config the parameters of AlignMark component.
 
-- Focus
+## Samples
 
-![Focus](./Attachment/README_Image/Focus.gif)
+- Unity --> Window --> Package Manager --> Packages-Mogoson --> Camera--> Samples.
 
-## Contact
-- If you have any questions, feel free to contact me at mogoson@outlook.com.
+------
+
+Copyright © 2025 Mogoson.	mogoson@outlook.com
