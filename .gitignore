@@ -38,3 +38,6 @@ sysinfo.txt
 /UnityProject/Library
 /UnityProject/obj
 /UnityProject/Temp
+/*.vsconfig
+/Logs
+/UserSettings
