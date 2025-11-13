@@ -20,6 +20,7 @@
  *  Description  :  Fix Camera Align Preview.
  *************************************************************************/
 
+using MGS.Editors;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.mgs.baseeditor": {
+      "version": "https://github.com/mogoson/MGS.BaseEditor.git?path=/Assets",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ed95bae14cfe19690d6548832e5ddbf5ce47ed69"
+    },
     "com.unity.collab-proxy": {
       "version": "2.3.1",
       "depth": 0,

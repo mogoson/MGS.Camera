@@ -2,7 +2,7 @@
     "name": "MGS.Camera.Sample",
     "rootNamespace": "",
     "references": [
-        "GUID:9f7b63f737cd0054ca50d92edf4e2c7a"
+        "MGS.Camera"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

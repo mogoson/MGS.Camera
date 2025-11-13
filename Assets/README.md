@@ -17,6 +17,7 @@
 - Unity --> Window --> Package Manager --> "+" --> Add package from git URL...
 
   ```text
+  https://github.com/mogoson/MGS.BaseEditor.git?path=/Assets
   https://github.com/mogoson/MGS.Camera.git?path=/Assets
   ```
 
